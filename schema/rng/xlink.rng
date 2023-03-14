@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
+             xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             ns="http://www.w3.org/1999/xlink"
+             datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+	  <a:documentation>
+		Issue number: 4.0
+		Issue date: 2008-08-01
+		Release number: 2.0
+		Release date: 2003-05-31
+		URL: http://www.s1000d.org/S1000D_4-1/xml_schema_flat/xlink.xsd
+		Copyright:
+			Copyright (C) 2011 by each of the following organizations:
+			1.  AeroSpace and Defence Industries Associations of Europe - ASD.
+			2.  Ministries of Defence of the member countries of ASD.
+
+			Limitations of Liability:
+
+			1.  This material is provided "As Is" and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.
+			2.  Neither ASD nor any person who has contributed to the creation, revision or maintenance of this material shall be liable for any direct, indirect, special or consequential damages or any other liability arising from any use of this material.
+			3.  Revisions to this document may occur after its issuance.  The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable. 
+		
+		Remarks: none
+	</a:documentation>
+	  <rng:define name="actuate">
+      <rng:optional>
+         <rng:attribute name="actuate">
+		
+			         <rng:choice>
+				           <rng:value>onLoad</rng:value>
+				           <rng:value>onRequest</rng:value>
+			         </rng:choice>
+		
+	        </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="arc">
+      <rng:element name="arc">
+		
+			      <rng:optional>
+            <rng:attribute name="type"/>
+         </rng:optional>
+			      <rng:ref name="xlink:from"/>
+			      <rng:ref name="xlink:to"/>
+			      <rng:ref name="xlink:XLINKBEH0"/>
+		
+	     </rng:element>
+   </rng:define>
+	  <rng:define name="from">
+      <rng:optional>
+         <rng:attribute name="from">
+            <rng:data type="NMTOKEN"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="href">
+      <rng:optional>
+         <rng:attribute name="href">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="HREFTITL">
+		    <rng:ref name="xlink:href"/>
+		    <rng:ref name="xlink:title"/>
+	  </rng:define>
+	  <rng:define name="label">
+      <rng:optional>
+         <rng:attribute name="label">
+            <rng:data type="NMTOKEN"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="locator">
+      <rng:element name="locator">
+		
+			      <rng:optional>
+            <rng:attribute name="type"/>
+         </rng:optional>
+			      <rng:ref name="xlink:href"/>
+			      <rng:ref name="xlink:title"/>
+			      <rng:ref name="xlink:label"/>
+		
+	     </rng:element>
+   </rng:define>
+	  <rng:define name="resource">
+      <rng:element name="resource">
+		
+			      <rng:optional>
+            <rng:attribute name="type"/>
+         </rng:optional>
+			      <rng:ref name="xlink:title"/>
+			      <rng:ref name="xlink:label"/>
+		
+	     </rng:element>
+   </rng:define>
+	  <rng:define name="show">
+      <rng:optional>
+         <rng:attribute name="show">
+		
+			         <rng:choice>
+				           <rng:value>new</rng:value>
+				           <rng:value>replace</rng:value>
+				           <rng:value>embed</rng:value>
+				           <rng:value>other</rng:value>
+				           <rng:value>none</rng:value>
+			         </rng:choice>
+		
+	        </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="title">
+      <rng:optional>
+         <rng:attribute name="title">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="to">
+      <rng:optional>
+         <rng:attribute name="to">
+            <rng:data type="NMTOKEN"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="type">
+      <rng:optional>
+         <rng:attribute name="type">
+		
+			         <rng:choice>
+				           <rng:value>simple</rng:value>
+				           <rng:value>extended</rng:value>
+			         </rng:choice>
+		
+	        </rng:attribute>
+      </rng:optional>
+   </rng:define>
+	  <rng:define name="XLINKATT">
+		    <a:documentation>
+            default value is : simple</a:documentation>
+      <rng:ref name="xlink:type"/>
+		    <rng:ref name="xlink:HREFTITL"/>
+		    <rng:ref name="xlink:XLINKBEH"/>
+	  </rng:define>
+	  <rng:define name="XLINKATT0">
+		    <rng:ref name="xlink:type"/>
+		    <rng:ref name="xlink:HREFTITL"/>
+		    <rng:ref name="xlink:XLINKBEH0"/>
+	  </rng:define>
+	  <rng:define name="XLINKATT1">
+		    <rng:ref name="xlink:type"/>
+		    <rng:ref name="xlink:HREFTITL"/>
+		    <rng:ref name="xlink:XLINKBEH1"/>
+	  </rng:define>
+	  <rng:define name="XLINKATT2">
+		    <rng:ref name="xlink:type"/>
+		    <rng:ref name="xlink:HREFTITL"/>
+		    <rng:ref name="xlink:XLINKBEH2"/>
+	  </rng:define>
+	  <rng:define name="XLINKATT3">
+		    <rng:ref name="xlink:type"/>
+		    <rng:ref name="xlink:HREFTITL"/>
+		    <rng:ref name="xlink:XLINKBEH"/>
+	  </rng:define>
+	  <rng:define name="XLINKATT4">
+		    <a:documentation>
+            default value is : simple</a:documentation>
+      <rng:ref name="xlink:type"/>
+		    <rng:ref name="xlink:HREFTITL"/>
+		    <rng:ref name="xlink:XLINKBEH2"/>
+	  </rng:define>
+	  <rng:define name="XLINKBEH">
+		    <a:documentation>
+            default value is : replace</a:documentation>
+      <rng:ref name="xlink:show"/>
+		    <a:documentation>
+            default value is : onRequest</a:documentation>
+      <rng:ref name="xlink:actuate"/>
+	  </rng:define>
+	  <rng:define name="XLINKBEH0">
+		    <rng:ref name="xlink:show"/>
+		    <rng:ref name="xlink:actuate"/>
+	  </rng:define>
+	  <rng:define name="XLINKBEH1">
+		    <rng:ref name="xlink:show"/>
+		    <rng:ref name="xlink:actuate"/>
+	  </rng:define>
+	  <rng:define name="XLINKBEH2">
+		    <a:documentation>
+            default value is : new</a:documentation>
+      <rng:ref name="xlink:show"/>
+		    <a:documentation>
+            default value is : onRequest</a:documentation>
+      <rng:ref name="xlink:actuate"/>
+	  </rng:define>
+	  <rng:define name="XLINKEXT">
+		    <rng:choice>
+			      <rng:ref name="xlink:resource"/>
+			      <rng:ref name="xlink:locator"/>
+			      <rng:ref name="xlink:arc"/>
+		    </rng:choice>
+	  </rng:define>
+</rng:grammar>

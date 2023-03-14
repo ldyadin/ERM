@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
+             xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+             ns=""
+             datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <a:documentation>
+        Issue number: 4.0
+        Issue date: 2008-08-01
+        Release number: 4.0
+        Release date: 2008-08-01
+        URL: http://www.s1000d.org/S1000D_4-0/xml_schema_flat/xcf.xsd
+        Root element: webcgm
+        Copyright:
+			Copyright (C) 2011 by each of the following organizations:
+			1.  AeroSpace and Defence Industries Associations of Europe - ASD.
+			2.  Ministries of Defence of the member countries of ASD.
+
+			Limitations of Liability:
+
+			1.  This material is provided "As Is" and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.
+			2.  Neither ASD nor any person who has contributed to the creation, revision or maintenance of this material shall be liable for any direct, indirect, special or consequential damages or any other liability arising from any use of this material.
+			3.  Revisions to this document may occur after its issuance.  The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable. 
+		
+        Remarks: none
+    </a:documentation>
+    <rng:define name="webcgm">
+      <rng:element name="webcgm">
+         <rng:ref name="webcgmType"/>
+      </rng:element>
+   </rng:define>
+    <rng:define name="webcgmType">
+        <rng:zeroOrMore>
+         <rng:choice>
+            <rng:ref name="grobject"/>
+            <rng:ref name="bindById"/>
+            <rng:ref name="bindByName"/>
+        </rng:choice>
+      </rng:zeroOrMore>
+        <rng:ref name="id"/>
+        <rng:ref name="version"/>
+        <rng:ref name="filename"/>
+        <rng:ref name="background-color"/>
+        <rng:ref name="pictureVisibility"/>
+        <rng:ref name="stylePropertiesAttGroup"/>
+    </rng:define>
+    <rng:define name="grobject">
+      <rng:element name="grobject">
+         <rng:ref name="grobjectType"/>
+      </rng:element>
+   </rng:define>
+    <rng:define name="grobjectType">
+        
+            <rng:zeroOrMore>
+         <rng:ref name="linkuri"/>
+      </rng:zeroOrMore>
+        
+        <rng:ref name="apsid"/>
+        <rng:ref name="screentip"/>
+        <rng:ref name="region"/>
+        <rng:ref name="viewcontext"/>
+        <rng:ref name="visibility"/>
+        <rng:ref name="interactivity"/>
+        <rng:ref name="stylePropertiesAttGroup"/>
+    </rng:define>
+    <rng:define name="linkuri">
+      <rng:element name="linkuri">
+         <rng:ref name="linkuriType"/>
+      </rng:element>
+   </rng:define>
+    <rng:define name="linkuriType">
+        <rng:ref name="uri"/>
+        <rng:ref name="behavior"/>
+        <rng:ref name="desc"/>
+    </rng:define>
+    <rng:define name="uri">
+      <rng:optional>
+         <rng:attribute name="uri">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="behavior">
+      <rng:optional>
+         <rng:attribute name="behavior">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="desc">
+      <rng:optional>
+         <rng:attribute name="desc">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="apsid">
+      <rng:optional>
+         <rng:attribute name="apsid">
+            <rng:data type="ID"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="screentip">
+      <rng:optional>
+         <rng:attribute name="screentip">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="region">
+      <rng:optional>
+         <rng:attribute name="region">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="viewcontext">
+      <rng:optional>
+         <rng:attribute name="viewcontext">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="visibility">
+      <rng:optional>
+         <rng:attribute name="visibility">
+            <rng:ref name="visibilityAttType"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="visibilityAttType">
+        <rng:choice>
+            <rng:value>off</rng:value>
+            <rng:value>inherit</rng:value>
+            <rng:value>on</rng:value>
+        </rng:choice>
+    </rng:define>
+    <rng:define name="interactivity">
+      <rng:optional>
+         <rng:attribute name="interactivity">
+            <rng:ref name="interactivityAttType"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="interactivityAttType">
+        <rng:choice>
+            <rng:value>off</rng:value>
+            <rng:value>inherit</rng:value>
+            <rng:value>on</rng:value>
+        </rng:choice>
+    </rng:define>
+    <rng:define name="stylePropertiesAttGroup">
+        <rng:ref name="text-size"/>
+        <rng:ref name="fill-color"/>
+        <rng:ref name="intensity"/>
+        <rng:ref name="stroke-color"/>
+        <rng:ref name="stroke-weight"/>
+        <rng:ref name="text-color"/>
+        <rng:ref name="text-font"/>
+        <rng:ref name="raster-intensity"/>
+    </rng:define>
+    <rng:define name="text-size">
+      <rng:optional>
+         <rng:attribute name="text-size">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="fill-color">
+      <rng:optional>
+         <rng:attribute name="fill-color">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="intensity">
+      <rng:optional>
+         <rng:attribute name="intensity">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="stroke-color">
+      <rng:optional>
+         <rng:attribute name="stroke-color">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="stroke-weight">
+      <rng:optional>
+         <rng:attribute name="stroke-weight">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="text-color">
+      <rng:optional>
+         <rng:attribute name="text-color">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="text-font">
+      <rng:optional>
+         <rng:attribute name="text-font">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="raster-intensity">
+      <rng:optional>
+         <rng:attribute name="raster-intensity">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="bindById">
+      <rng:element name="bindById">
+         <rng:ref name="bindByIdType"/>
+      </rng:element>
+   </rng:define>
+    <rng:define name="bindByIdType">
+        
+            <rng:zeroOrMore>
+         <rng:ref name="linkuri"/>
+      </rng:zeroOrMore>
+        
+        <rng:ref name="apsid"/>
+        <rng:ref name="screentip"/>
+        <rng:ref name="region"/>
+        <rng:ref name="viewcontext"/>
+        <rng:ref name="visibility"/>
+        <rng:ref name="interactivity"/>
+        <rng:ref name="stylePropertiesAttGroup"/>
+    </rng:define>
+    <rng:define name="bindByName">
+      <rng:element name="bindByName">
+         <rng:ref name="bindByNameType"/>
+      </rng:element>
+   </rng:define>
+    <rng:define name="bindByNameType">
+        
+            <rng:zeroOrMore>
+         <rng:ref name="linkuri"/>
+      </rng:zeroOrMore>
+        
+        <rng:ref name="apstargetname"/>
+        <rng:ref name="screentip"/>
+        <rng:ref name="region"/>
+        <rng:ref name="viewcontext"/>
+        <rng:ref name="visibility"/>
+        <rng:ref name="interactivity"/>
+        <rng:ref name="stylePropertiesAttGroup"/>
+    </rng:define>
+    <rng:define name="apstargetname">
+      <rng:optional>
+         <rng:attribute name="apstargetname">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="id">
+      <rng:optional>
+         <rng:attribute name="id">
+            <rng:data type="ID"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="version">
+      <rng:optional>
+         <rng:attribute name="version">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="filename">
+      <rng:optional>
+         <rng:attribute name="filename">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="background-color">
+      <rng:optional>
+         <rng:attribute name="background-color">
+            <rng:data type="string"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="pictureVisibility">
+      <rng:optional>
+         <rng:attribute name="pictureVisibility">
+            <rng:ref name="pictureVisibilityAttType"/>
+         </rng:attribute>
+      </rng:optional>
+   </rng:define>
+    <rng:define name="pictureVisibilityAttType">
+        <rng:choice>
+            <rng:value>off</rng:value>
+            <rng:value>on</rng:value>
+        </rng:choice>
+    </rng:define>
+</rng:grammar>

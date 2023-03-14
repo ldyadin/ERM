@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+    <!--<file src="appliccrossreftable.xsd"/>-->
+    <file src="brex.xsd"/>
+    <!--<file src="checklist.xsd"/>
+    <file src="comment.xsd"/>
+    <file src="comrep.xsd"/>
+    <file src="condcrossreftable.xsd"/>
+    <file src="container.xsd"/>
+    <file src="crew.xsd"/>
+    <file src="dc.xsd"/>
+    <file src="ddn.xsd"/>
+    <file src="descript.xsd"/>
+    <file src="dml.xsd"/>
+    <file src="fault.xsd"/>
+    <file src="frontmatter.xsd"/>
+    <file src="ipd.xsd"/>
+    <file src="learning.xsd"/>
+    <file src="pm.xsd"/>
+    <file src="prdcrossreftable.xsd"/>
+    <file src="proced.xsd"/>
+    <file src="process.xsd"/>
+    <file src="rdf.xsd"/>
+    <file src="sb.xsd"/>
+    <file src="schedul.xsd"/>
+    <file src="scocontent.xsd"/>
+    <file src="scormcontentpackage.xsd"/>
+    <file src="update.xsd"/>
+    <file src="wrngdata.xsd"/>
+    <file src="wrngflds.xsd"/>
+    <file src="xcf.xsd"/>
+    <file src="xlink.xsd"/>-->
+</files>

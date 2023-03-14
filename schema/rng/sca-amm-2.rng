@@ -1,0 +1,4192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ========================================================== -->
+<!-- This is the XML DTD for the Aircraft Maintenance Manual -->
+<!-- ========================================================== -->
+<!-- DTD Reference : ATA-TEXT-DTD-AMM-VER8-REV2-LEVEL2 -->
+<!-- ATA DTD Level : -->
+<!-- ========================================================== -->
+<!--  20 ��� � ������������ DTD �������: � ��������� ���� (title, -->
+<!-- �������� ������� CHG � ����� ������������� ������� -->
+<!-- ��������� ������ ��������� �� ���� ������, ��� ��� ���� -->
+<!-- Usage: -->
+<!-- DOCTYPE sca-amm PUBLIC -->
+<!--  "-//SCA-ATA-TEXT//DTD AMM-VER8-REV2-LEVEL2//EN" "sca-amm-2.dtd" -->
+<!-- Arbortext customizations -->
+<!--
+  <!ENTITY % sgml-entity-declarations "IGNORE">
+  <![%sgml-entity-declarations;[
+  <!ENTITY % xml-entity-declarations "IGNORE">
+  ]]>
+  <!ENTITY % xml-entity-declarations "INCLUDE">
+  <!ENTITY % atimath PUBLIC "-//Arbortext//ELEMENTS XML Math Equation Structures//EN" "../../entities/atimathx.dtd">
+  %atimath;
+-->
+<!-- ========================================================== -->
+<!-- NOTATIONS -->
+<!-- ========================================================== -->
+<!-- Computer Graphics Metafile (*.cgm) -->
+<!-- NOTATION CCITT Group4 Facsimile (*.ccitt) -->
+<!-- Graphic Companion File (*.gcf) -->
+<!-- Portable Document Format (*.pdf) -->
+<!-- Portable Network Graphics (*.png) -->
+<!-- Joint Photographic Experts Group Raster (*.jpg;*.jpeg) -->
+<!-- Virtual Reality Modeling Language (*.vrml) -->
+<!-- Motion Pictures Expert Group (*.mpeg) -->
+<!-- Motion Pictures Expert Group, Audio Layer 3 (*.mp3) -->
+<!-- =========================================================== -->
+<!-- ENTITIES -->
+<!-- =========================================================== -->
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <define name="g.r">
+    <choice>
+      <zeroOrMore>
+        <ref name="refblock.element"/>
+      </zeroOrMore>
+      <group>
+        <zeroOrMore>
+          <ref name="grphcref.element"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="refext.element"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="refint.element"/>
+        </zeroOrMore>
+      </group>
+    </choice>
+  </define>
+  <define name="w.c">
+    <zeroOrMore>
+      <ref name="warning.element"/>
+    </zeroOrMore>
+    <zeroOrMore>
+      <ref name="caution.element"/>
+    </zeroOrMore>
+  </define>
+  <define name="text">
+    <oneOrMore>
+      <choice>
+        <ref name="para.element"/>
+        <ref name="table.element"/>
+        <ref name="unlist.element"/>
+        <ref name="numlist.element"/>
+        <ref name="note.element"/>
+      </choice>
+    </oneOrMore>
+  </define>
+  <define name="text_wo_note">
+    <oneOrMore>
+      <choice>
+        <ref name="para.element"/>
+        <ref name="table.element"/>
+        <ref name="unlist.element"/>
+        <ref name="numlist.element"/>
+      </choice>
+    </oneOrMore>
+  </define>
+  <define name="deleted">
+    <ref name="deleted.element"/>
+    <zeroOrMore>
+      <ref name="chgdesc.element"/>
+    </zeroOrMore>
+  </define>
+  <define name="yesorno">
+    <data type="string" datatypeLibrary=""/>
+  </define>
+  <define name="revatt">
+    <attribute name="chg">
+      <choice>
+        <value>N</value>
+        <value>R</value>
+        <value>U</value>
+        <value>D</value>
+      </choice>
+    </attribute>
+    <attribute name="key">
+      <data type="ID"/>
+    </attribute>
+    <attribute name="revdate"/>
+  </define>
+  <define name="einent">
+    <choice>
+      <ref name="ein.element"/>
+      <ref name="einmfr.element"/>
+    </choice>
+  </define>
+  <!-- =========================================================== -->
+  <!-- STANDART ENTITIES -->
+  <!-- =========================================================== -->
+  <!--
+    <!ENTITY % ISOtech PUBLIC "ISO 8879-1986//ENTITIES General Technical//EN" "iso-tech.ent">
+    %ISOtech;
+    <!ENTITY % ISOpub  PUBLIC "ISO 8879-1986//ENTITIES Publishing//EN" "iso-pub.ent">
+    %ISOpub;
+    <!ENTITY % ISOnum  PUBLIC "ISO 8879-1986//ENTITIES Numeric and Special Graphic//EN" "iso-num.ent">
+    %ISOnum;
+    <!ENTITY % ISOgrk1 PUBLIC "ISO 8879-1986//ENTITIES Greek Letters//EN" "iso-grk1.ent">
+    %ISOgrk1;
+    <!ENTITY % ISOgrk2 PUBLIC "ISO 8879-1986//ENTITIES Monotoniko Greek//EN" "iso-grk2.ent">
+    %ISOgrk2;
+    <!ENTITY % ISOgrk3 PUBLIC "ISO 8879-1986//ENTITIES Greek Symbols//EN" "iso-grk3.ent">
+    %ISOgrk3;
+    <!ENTITY % ISOgrk4 PUBLIC "ISO 8879-1986//ENTITIES Alternative Greek Symbols//EN" "iso-grk4.ent">
+    %ISOgrk4;
+    <!ENTITY % ISOlat1 PUBLIC "ISO 8879-1986//ENTITIES Added Latin 1//EN" "iso-lat1.ent">
+    %ISOlat1;
+    <!ENTITY % ISObox PUBLIC  "ISO 8879-1986//ENTITIES Box and Line Drawing//EN" "iso-box.ent">
+    %ISObox;
+    <!ENTITY % ISOamso PUBLIC "ISO 8879-1986//ENTITIES Added Math Symbols: Ordinary//EN" "iso-amso.ent">
+    %ISOamso;
+    <!ENTITY % ISOamsc PUBLIC "ISO 8879-1986//ENTITIES Added Math Symbols: Delimiters//EN" "iso-amsc.ent">
+    %ISOamsc;
+  -->
+  <!--  =========================================================== -->
+  <!-- AMM TOP LEVEL STRUCTURE -->
+  <!--  =========================================================== -->
+  <define name="sca-amm-2.element">
+    <element name="sca-amm-2">
+      <ref name="sca-amm-2.attlist"/>
+      <oneOrMore>
+        <choice>
+          <group>
+            <ref name="title.element"/>
+            <optional>
+              <ref name="legalntc.element"/>
+            </optional>
+            <ref name="mfmatr.element"/>
+            <oneOrMore>
+              <ref name="chapter.element"/>
+            </oneOrMore>
+          </group>
+          <ref name="increv.element"/>
+          <oneOrMore>
+            <ref name="tr.element"/>
+          </oneOrMore>
+        </choice>
+      </oneOrMore>
+      <choice>
+        <ref name="revst.element"/>
+        <ref name="revend.element"/>
+        <ref name="cocst.element"/>
+        <ref name="cocend.element"/>
+        <ref name="docunit.element"/>
+        <ref name="hotlink.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="sca-amm-2.attlist" combine="interleave">
+    <attribute name="spl"/>
+    <attribute name="model"/>
+    <attribute name="oidate"/>
+    <attribute name="revdate"/>
+    <attribute name="tsn"/>
+    <optional>
+      <attribute name="cus"/>
+    </optional>
+    <optional>
+      <attribute name="cusname"/>
+    </optional>
+    <optional>
+      <attribute name="docnbr"/>
+    </optional>
+    <attribute name="lang"/>
+    <optional>
+      <attribute name="chg" a:defaultValue="N">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="efflen"/>
+    </optional>
+    <optional>
+      <attribute name="efftype"/>
+    </optional>
+  </define>
+  <define name="increv.element">
+    <element name="increv">
+      <ref name="increv.attlist"/>
+      <optional>
+        <ref name="transltr.element"/>
+      </optional>
+      <group>
+        <optional>
+          <ref name="legalntc.element"/>
+        </optional>
+        <oneOrMore>
+          <choice>
+            <ref name="chapter.element"/>
+            <ref name="section.element"/>
+            <ref name="subject.element"/>
+            <ref name="pgblk.element"/>
+            <ref name="task.element"/>
+            <ref name="subtask.element"/>
+            <ref name="sheet.element"/>
+            <ref name="graphic.element"/>
+            <ref name="trlist.element"/>
+            <ref name="intro.element"/>
+            <ref name="effxref.element"/>
+            <ref name="sblist.element"/>
+            <ref name="coclist.element"/>
+            <ref name="drindex.element"/>
+            <ref name="hazmtlst.element"/>
+            <ref name="zac.element"/>
+            <ref name="zoning.element"/>
+            <ref name="acclst.element"/>
+            <ref name="glossary.element"/>
+          </choice>
+        </oneOrMore>
+      </group>
+    </element>
+  </define>
+  <define name="increv.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="tr.element">
+    <element name="tr">
+      <ref name="tr.attlist"/>
+      <ref name="trfmatr.element"/>
+      <choice>
+        <ref name="chapter.element"/>
+        <oneOrMore>
+          <ref name="section.element"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="subject.element"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="pgblk.element"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="task.element"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="subtask.element"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="sheet.element"/>
+        </oneOrMore>
+        <oneOrMore>
+          <ref name="graphic.element"/>
+        </oneOrMore>
+        <ref name="intro.element"/>
+        <ref name="effxref.element"/>
+        <ref name="sblist.element"/>
+        <ref name="coclist.element"/>
+        <ref name="drindex.element"/>
+        <ref name="legalntc.element"/>
+        <ref name="hazmtlst.element"/>
+        <ref name="zac.element"/>
+        <ref name="zoning.element"/>
+        <ref name="acclst.element"/>
+        <ref name="glossary.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="tr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="trfmatr.element">
+    <element name="trfmatr">
+      <ref name="trfmatr.attlist"/>
+      <ref name="title.element"/>
+      <ref name="trreason.element"/>
+      <optional>
+        <ref name="text"/>
+      </optional>
+    </element>
+  </define>
+  <define name="trfmatr.attlist" combine="interleave">
+    <attribute name="trnbr"/>
+    <optional>
+      <attribute name="trdel"/>
+    </optional>
+    <optional>
+      <attribute name="trrepl"/>
+    </optional>
+    <attribute name="issdate"/>
+  </define>
+  <define name="trreason.element">
+    <element name="trreason">
+      <ref name="trreason.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="trreason.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!--  =========================================================== -->
+  <!-- Legal Notice Information -->
+  <!--  =========================================================== -->
+  <define name="legalntc.element">
+    <element name="legalntc">
+      <ref name="legalntc.attlist"/>
+      <oneOrMore>
+        <choice>
+          <ref name="exprtcl.element"/>
+          <ref name="cpyrght.element"/>
+          <ref name="proptary.element"/>
+          <ref name="geninfo.element"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="legalntc.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="proptary.element">
+    <element name="proptary">
+      <ref name="proptary.attlist"/>
+      <ref name="fullstmt.element"/>
+      <optional>
+        <ref name="partstmt.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="proptary.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="fullstmt.element">
+    <element name="fullstmt">
+      <ref name="fullstmt.attlist"/>
+      <optional>
+        <ref name="title.element"/>
+      </optional>
+      <optional>
+        <ref name="cpyrght.element"/>
+      </optional>
+      <oneOrMore>
+        <ref name="para.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="fullstmt.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="partstmt.element">
+    <element name="partstmt">
+      <ref name="partstmt.attlist"/>
+      <optional>
+        <ref name="title.element"/>
+      </optional>
+      <oneOrMore>
+        <ref name="para.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="partstmt.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="exprtcl.element">
+    <element name="exprtcl">
+      <ref name="exprtcl.attlist"/>
+      <oneOrMore>
+        <choice>
+          <ref name="para.element"/>
+          <ref name="unlist.element"/>
+          <ref name="numlist.element"/>
+          <ref name="note.element"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="exprtcl.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cpyrght.element">
+    <element name="cpyrght">
+      <ref name="cpyrght.attlist"/>
+      <zeroOrMore>
+        <ref name="year.element"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="holder.element"/>
+      </zeroOrMore>
+      <ref name="geninfo.element"/>
+    </element>
+  </define>
+  <define name="cpyrght.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="year.element">
+    <element name="year">
+      <ref name="year.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="year.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="holder.element">
+    <element name="holder">
+      <ref name="holder.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="holder.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="geninfo.element">
+    <element name="geninfo">
+      <ref name="geninfo.attlist"/>
+      <oneOrMore>
+        <choice>
+          <ref name="para.element"/>
+          <ref name="unlist.element"/>
+          <ref name="numlist.element"/>
+          <ref name="note.element"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="geninfo.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!--  =========================================================== -->
+  <!-- AMM FRONT MATTER -->
+  <!--  =========================================================== -->
+  <define name="mfmatr.element">
+    <element name="mfmatr">
+      <ref name="mfmatr.attlist"/>
+      <optional>
+        <ref name="transltr.element"/>
+      </optional>
+      <optional>
+        <ref name="trlist.element"/>
+      </optional>
+      <ref name="intro.element"/>
+      <ref name="effxref.element"/>
+      <ref name="sblist.element"/>
+      <optional>
+        <ref name="coclist.element"/>
+      </optional>
+      <optional>
+        <ref name="drindex.element"/>
+      </optional>
+      <optional>
+        <ref name="hazmtlst.element"/>
+      </optional>
+      <optional>
+        <ref name="zac.element"/>
+      </optional>
+      <optional>
+        <ref name="glossary.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="mfmatr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="transltr.element">
+    <element name="transltr">
+      <ref name="transltr.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <ref name="title.element"/>
+      <choice>
+        <ref name="prclist1.element"/>
+        <ref name="text"/>
+      </choice>
+    </element>
+  </define>
+  <define name="transltr.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="trlist.element">
+    <element name="trlist">
+      <ref name="trlist.attlist"/>
+      <optional>
+        <ref name="text"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="trdata.element"/>
+        </oneOrMore>
+        <ref name="isempty.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="trlist.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="trdata.element">
+    <element name="trdata">
+      <ref name="trdata.attlist"/>
+      <ref name="trnbr.element"/>
+      <ref name="trstatus.element"/>
+      <oneOrMore>
+        <ref name="trloc.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="trdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="intro.element">
+    <element name="intro">
+      <ref name="intro.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <ref name="title.element"/>
+      <ref name="prclist1.element"/>
+    </element>
+  </define>
+  <define name="intro.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="effxref.element">
+    <element name="effxref">
+      <ref name="effxref.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <ref name="title.element"/>
+      <optional>
+        <ref name="text"/>
+      </optional>
+      <oneOrMore>
+        <ref name="effdata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="effxref.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="effdata.element">
+    <element name="effdata">
+      <ref name="effdata.attlist"/>
+      <optional>
+        <ref name="cus.element"/>
+      </optional>
+      <optional>
+        <ref name="modtype.element"/>
+      </optional>
+      <ref name="cec.element"/>
+      <optional>
+        <ref name="linenbr.element"/>
+      </optional>
+      <optional>
+        <ref name="ect.element"/>
+      </optional>
+      <optional>
+        <ref name="venbr.element"/>
+      </optional>
+      <optional>
+        <ref name="esnbr.element"/>
+      </optional>
+      <optional>
+        <ref name="benbr.element"/>
+      </optional>
+      <ref name="msnbr.element"/>
+      <optional>
+        <ref name="acn.element"/>
+      </optional>
+      <optional>
+        <ref name="operator.element"/>
+      </optional>
+      <optional>
+        <ref name="fslgnbr.element"/>
+      </optional>
+      <optional>
+        <ref name="cac.element"/>
+      </optional>
+      <optional>
+        <ref name="cusaid.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="effdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="ect.element">
+    <element name="ect">
+      <ref name="ect.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="ect.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="esnbr.element">
+    <element name="esnbr">
+      <ref name="esnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="esnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cusaid.element">
+    <element name="cusaid">
+      <ref name="cusaid.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cusaid.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cac.element">
+    <element name="cac">
+      <ref name="cac.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cac.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="fslgnbr.element">
+    <element name="fslgnbr">
+      <ref name="fslgnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="fslgnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="operator.element">
+    <element name="operator">
+      <ref name="operator.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="operator.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="sblist.element">
+    <element name="sblist">
+      <ref name="sblist.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <ref name="title.element"/>
+      <ref name="text"/>
+      <choice>
+        <oneOrMore>
+          <ref name="sbdata.element"/>
+        </oneOrMore>
+        <ref name="isempty.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="sblist.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="sbdata.element">
+    <element name="sbdata">
+      <ref name="sbdata.attlist"/>
+      <optional>
+        <ref name="sbnbr.element"/>
+      </optional>
+      <optional>
+        <ref name="sbrev.element"/>
+      </optional>
+      <optional>
+        <ref name="sbtitle.element"/>
+      </optional>
+      <optional>
+        <ref name="sbnrmfr.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="eonbr.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="atanbr.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="mdnbr.element"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="cocnbr.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="sc.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="aclist.element"/>
+      </zeroOrMore>
+      <ref name="ics.element"/>
+      <optional>
+        <ref name="custeff.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="sbdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="sbnrmfr.element">
+    <element name="sbnrmfr">
+      <ref name="sbnrmfr.attlist"/>
+      <ref name="sbnbr.element"/>
+      <optional>
+        <ref name="mfr.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="sbnrmfr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="mfr.element">
+    <element name="mfr">
+      <ref name="mfr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="mfr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="sbrev.element">
+    <element name="sbrev">
+      <ref name="sbrev.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="sbrev.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="aclist.element">
+    <element name="aclist">
+      <ref name="aclist.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="aclist.attlist" combine="interleave">
+    <optional>
+      <attribute name="status"/>
+    </optional>
+    <optional>
+      <attribute name="effrg"/>
+    </optional>
+  </define>
+  <define name="custeff.element">
+    <element name="custeff">
+      <ref name="custeff.attlist"/>
+      <oneOrMore>
+        <ref name="cus.element"/>
+        <ref name="effrc.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="custeff.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="coclist.element">
+    <element name="coclist">
+      <ref name="coclist.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <ref name="title.element"/>
+      <ref name="text"/>
+      <choice>
+        <oneOrMore>
+          <ref name="cocdata.element"/>
+        </oneOrMore>
+        <ref name="isempty.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="coclist.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="cocdata.element">
+    <element name="cocdata">
+      <ref name="cocdata.attlist"/>
+      <optional>
+        <ref name="cocnbr.element"/>
+      </optional>
+      <optional>
+        <ref name="cocrev.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="eonbr.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="atanbr.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="mdnbr.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="custeff.element"/>
+      </optional>
+      <optional>
+        <ref name="sc.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="aclist.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="title.element"/>
+      </optional>
+      <choice>
+        <ref name="icdate.element"/>
+        <ref name="ics.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="cocdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cocrev.element">
+    <element name="cocrev">
+      <ref name="cocrev.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cocrev.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="icdate.element">
+    <element name="icdate">
+      <ref name="icdate.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="icdate.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="eonbr.element">
+    <element name="eonbr">
+      <ref name="eonbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="eonbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="drindex.element">
+    <element name="drindex">
+      <ref name="drindex.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <ref name="title.element"/>
+      <ref name="text"/>
+      <oneOrMore>
+        <ref name="drdata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="drindex.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="drdata.element">
+    <element name="drdata">
+      <ref name="drdata.attlist"/>
+      <ref name="refext.element"/>
+      <ref name="drdesc.element"/>
+      <oneOrMore>
+        <ref name="refint.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="drdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cus.element">
+    <element name="cus">
+      <ref name="cus.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cus.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="effrc.element">
+    <element name="effrc">
+      <ref name="effrc.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="effrc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="modtype.element">
+    <element name="modtype">
+      <ref name="modtype.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="modtype.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cec.element">
+    <element name="cec">
+      <ref name="cec.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cec.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="linenbr.element">
+    <element name="linenbr">
+      <ref name="linenbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="linenbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="venbr.element">
+    <element name="venbr">
+      <ref name="venbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="venbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="benbr.element">
+    <element name="benbr">
+      <ref name="benbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="benbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- ELEMENT sc    (#PCDATA) -->
+  <define name="sbnbr.element">
+    <element name="sbnbr">
+      <ref name="sbnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="sbnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="sbtitle.element">
+    <element name="sbtitle">
+      <ref name="sbtitle.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="sbtitle.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="acn.element">
+    <element name="acn">
+      <ref name="acn.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="acn.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="drdesc.element">
+    <element name="drdesc">
+      <ref name="drdesc.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="drdesc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="atanbr.element">
+    <element name="atanbr">
+      <ref name="atanbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="atanbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="mdnbr.element">
+    <element name="mdnbr">
+      <ref name="mdnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="mdnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cocnbr.element">
+    <element name="cocnbr">
+      <ref name="cocnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cocnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="ics.element">
+    <element name="ics">
+      <ref name="ics.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="ics.attlist" combine="interleave">
+    <optional>
+      <attribute name="status"/>
+    </optional>
+  </define>
+  <define name="msnbr.element">
+    <element name="msnbr">
+      <ref name="msnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="msnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="trnbr.element">
+    <element name="trnbr">
+      <ref name="trnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="trnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="trstatus.element">
+    <element name="trstatus">
+      <ref name="trstatus.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="trstatus.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="trloc.element">
+    <element name="trloc">
+      <ref name="trloc.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="trloc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="hazmtlst.element">
+    <element name="hazmtlst">
+      <ref name="hazmtlst.attlist"/>
+      <ref name="title.element"/>
+      <zeroOrMore>
+        <ref name="pretopic.element"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="hazmt.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="hazmtlst.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="hazmt.element">
+    <element name="hazmt">
+      <ref name="hazmt.attlist"/>
+      <ref name="title.element"/>
+      <ref name="warning.element"/>
+    </element>
+  </define>
+  <define name="hazmt.attlist" combine="interleave">
+    <attribute name="id">
+      <data type="ID"/>
+    </attribute>
+  </define>
+  <!--  =========================================================== -->
+  <!-- Aircraft Zoning and Access -->
+  <!--  =========================================================== -->
+  <define name="zac.element">
+    <element name="zac">
+      <ref name="zac.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="zoning.element"/>
+      </optional>
+      <optional>
+        <ref name="acclst.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="graphic.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="zac.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <!-- Access description -->
+  <define name="acclst.element">
+    <element name="acclst">
+      <ref name="acclst.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="title.element"/>
+      </optional>
+      <optional>
+        <ref name="text"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="access.element"/>
+        </oneOrMore>
+        <ref name="isempty.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="acclst.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="access.element">
+    <element name="access">
+      <ref name="access.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="pan.element"/>
+      <oneOrMore>
+        <ref name="accdata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="access.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="accdata.element">
+    <element name="accdata">
+      <ref name="accdata.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="zone.element"/>
+      <optional>
+        <ref name="accein.element"/>
+      </optional>
+      <optional>
+        <ref name="accessto.element"/>
+      </optional>
+      <optional>
+        <ref name="fastener.element"/>
+      </optional>
+      <optional>
+        <ref name="dd.element"/>
+      </optional>
+      <optional>
+        <ref name="openhour.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="grphcref.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="accdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="accein.element">
+    <element name="accein">
+      <ref name="accein.attlist"/>
+      <oneOrMore>
+        <ref name="einent"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="accein.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="accessto.element">
+    <element name="accessto">
+      <ref name="accessto.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="accessto.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="fastener.element">
+    <element name="fastener">
+      <ref name="fastener.attlist"/>
+      <ref name="fsttype.element"/>
+      <ref name="fstqty.element"/>
+    </element>
+  </define>
+  <define name="fastener.attlist" combine="interleave">
+    <optional>
+      <attribute name="hing">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="fsttype.element">
+    <element name="fsttype">
+      <ref name="fsttype.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="fsttype.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="fstqty.element">
+    <element name="fstqty">
+      <ref name="fstqty.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="fstqty.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="dd.element">
+    <element name="dd">
+      <ref name="dd.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="dd.attlist" combine="interleave">
+    <optional>
+      <attribute name="width"/>
+    </optional>
+    <optional>
+      <attribute name="length"/>
+    </optional>
+    <optional>
+      <attribute name="dia"/>
+    </optional>
+    <optional>
+      <attribute name="unit">
+        <choice>
+          <value>ft</value>
+          <value>in</value>
+          <value>mm</value>
+          <value>cm</value>
+          <value>m</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="openhour.element">
+    <element name="openhour">
+      <ref name="openhour.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="openhour.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- zones description -->
+  <define name="zoning.element">
+    <element name="zoning">
+      <ref name="zoning.attlist"/>
+      <zeroOrMore>
+        <ref name="chgdesc.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="title.element"/>
+      </optional>
+      <optional>
+        <ref name="text"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="majzone.element"/>
+        </oneOrMore>
+        <ref name="isempty.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="zoning.attlist" combine="interleave">
+    <ref name="revatt"/>
+  </define>
+  <define name="majzone.element">
+    <element name="majzone">
+      <ref name="majzone.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="zone.element"/>
+      <oneOrMore>
+        <ref name="zondata.element"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="subzone.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="majzone.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="subzone.element">
+    <element name="subzone">
+      <ref name="subzone.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="zone.element"/>
+      <oneOrMore>
+        <ref name="zondata.element"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="speczone.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="subzone.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="speczone.element">
+    <element name="speczone">
+      <ref name="speczone.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="zone.element"/>
+      <oneOrMore>
+        <ref name="zondata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="speczone.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="zondata.element">
+    <element name="zondata">
+      <ref name="zondata.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="zonedesc.element"/>
+      <ref name="side.element"/>
+      <optional>
+        <ref name="bndfrom.element"/>
+      </optional>
+      <optional>
+        <ref name="bndto.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="grphcref.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="zondata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="side.element">
+    <element name="side">
+      <ref name="side.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="side.attlist" combine="interleave">
+    <attribute name="hand">
+      <choice>
+        <value>LH</value>
+        <value>RH</value>
+        <value>LR</value>
+      </choice>
+    </attribute>
+  </define>
+  <define name="zonedesc.element">
+    <element name="zonedesc">
+      <ref name="zonedesc.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="zonedesc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="bndfrom.element">
+    <element name="bndfrom">
+      <ref name="bndfrom.attlist"/>
+      <oneOrMore>
+        <ref name="boundary.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="bndfrom.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="bndto.element">
+    <element name="bndto">
+      <ref name="bndto.attlist"/>
+      <oneOrMore>
+        <ref name="boundary.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="bndto.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="boundary.element">
+    <element name="boundary">
+      <ref name="boundary.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="frame.element"/>
+          <ref name="rib.element"/>
+          <ref name="stnnbr.element"/>
+          <ref name="stgr.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="boundary.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="frame.element">
+    <element name="frame">
+      <ref name="frame.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="frame.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="stnnbr.element">
+    <element name="stnnbr">
+      <ref name="stnnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="stnnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="rib.element">
+    <element name="rib">
+      <ref name="rib.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="rib.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="stgr.element">
+    <element name="stgr">
+      <ref name="stgr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="stgr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!--  =========================================================== -->
+  <!-- Glossary -->
+  <!--  =========================================================== -->
+  <define name="glossary.element">
+    <element name="glossary">
+      <ref name="glossary.attlist"/>
+      <choice>
+        <group>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <ref name="title.element"/>
+          <optional>
+            <ref name="text"/>
+          </optional>
+          <zeroOrMore>
+            <ref name="glosdata.element"/>
+          </zeroOrMore>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="glossary.attlist" combine="interleave">
+    <optional>
+      <attribute name="oldkey"/>
+    </optional>
+    <ref name="revatt"/>
+  </define>
+  <define name="glosdata.element">
+    <element name="glosdata">
+      <ref name="glosdata.attlist"/>
+      <ref name="term.element"/>
+      <ref name="def.element"/>
+    </element>
+  </define>
+  <define name="glosdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="term.element">
+    <element name="term">
+      <ref name="term.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="term.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="def.element">
+    <element name="def">
+      <ref name="def.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="def.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- CHAPTER -->
+  <!-- =========================================================== -->
+  <define name="chapter.element">
+    <element name="chapter">
+      <ref name="chapter.attlist"/>
+      <choice>
+        <group>
+          <optional>
+            <ref name="effect.element"/>
+          </optional>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <ref name="title.element"/>
+          <zeroOrMore>
+            <ref name="chapterfm.element"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="toplist.element"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="chglist.element"/>
+          </zeroOrMore>
+          <ref name="eplist.element"/>
+          <ref name="chatoc.element"/>
+          <oneOrMore>
+            <ref name="section.element"/>
+          </oneOrMore>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="chapter.attlist" combine="interleave">
+    <optional>
+      <attribute name="chappref"/>
+    </optional>
+    <attribute name="chapnbr"/>
+    <ref name="revatt"/>
+  </define>
+  <define name="chapterfm.element">
+    <element name="chapterfm">
+      <ref name="chapterfm.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="chapterfm.attlist" combine="interleave">
+    <attribute name="model"/>
+    <attribute name="docnbr"/>
+    <attribute name="scope"/>
+    <attribute name="rev"/>
+    <attribute name="revyear"/>
+    <attribute name="book"/>
+    <attribute name="bookname"/>
+  </define>
+  <define name="toplist.element">
+    <element name="toplist">
+      <ref name="toplist.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="toplist.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="chglist.element">
+    <element name="chglist">
+      <ref name="chglist.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="chglist.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="eplist.element">
+    <element name="eplist">
+      <ref name="eplist.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="table.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="eplist.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="chatoc.element">
+    <element name="chatoc">
+      <ref name="chatoc.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="table.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="chatoc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- SECTION -->
+  <!-- =========================================================== -->
+  <define name="section.element">
+    <element name="section">
+      <ref name="section.attlist"/>
+      <choice>
+        <group>
+          <optional>
+            <ref name="effect.element"/>
+          </optional>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <ref name="title.element"/>
+          <oneOrMore>
+            <ref name="subject.element"/>
+          </oneOrMore>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="section.attlist" combine="interleave">
+    <optional>
+      <attribute name="chappref"/>
+    </optional>
+    <attribute name="chapnbr"/>
+    <attribute name="sectnbr"/>
+    <ref name="revatt"/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- SUBJECT -->
+  <!-- =========================================================== -->
+  <define name="subject.element">
+    <element name="subject">
+      <ref name="subject.attlist"/>
+      <choice>
+        <group>
+          <optional>
+            <ref name="effect.element"/>
+          </optional>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <ref name="title.element"/>
+          <oneOrMore>
+            <ref name="pgblk.element"/>
+          </oneOrMore>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="subject.attlist" combine="interleave">
+    <optional>
+      <attribute name="chappref"/>
+    </optional>
+    <attribute name="chapnbr"/>
+    <attribute name="sectnbr"/>
+    <attribute name="subjnbr"/>
+    <ref name="revatt"/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- PAGEBLOCK -->
+  <!-- =========================================================== -->
+  <define name="pgblk.element">
+    <element name="pgblk">
+      <ref name="pgblk.attlist"/>
+      <choice>
+        <group>
+          <ref name="effect.element"/>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <ref name="title.element"/>
+          <optional>
+            <ref name="pbfmatr.element"/>
+          </optional>
+          <optional>
+            <choice>
+              <oneOrMore>
+                <ref name="task.element"/>
+              </oneOrMore>
+              <ref name="prclist1.element"/>
+            </choice>
+          </optional>
+          <zeroOrMore>
+            <ref name="graphic.element"/>
+          </zeroOrMore>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="pgblk.attlist" combine="interleave">
+    <optional>
+      <attribute name="chappref"/>
+    </optional>
+    <attribute name="chapnbr"/>
+    <attribute name="sectnbr"/>
+    <attribute name="subjnbr"/>
+    <attribute name="pgblknbr"/>
+    <optional>
+      <attribute name="confnbr"/>
+    </optional>
+    <ref name="revatt"/>
+  </define>
+  <define name="pbfmatr.element">
+    <element name="pbfmatr">
+      <ref name="pbfmatr.attlist"/>
+      <oneOrMore>
+        <ref name="title.element"/>
+        <ref name="g.r"/>
+        <choice>
+          <ref name="list1.element"/>
+          <ref name="text"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="pbfmatr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- TASK -->
+  <!-- =========================================================== -->
+  <define name="task.element">
+    <element name="task">
+      <ref name="task.attlist"/>
+      <choice>
+        <group>
+          <ref name="effect.element"/>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <ref name="title.element"/>
+          <ref name="g.r"/>
+          <ref name="w.c"/>
+          <zeroOrMore>
+            <ref name="note.element"/>
+          </zeroOrMore>
+          <optional>
+            <ref name="assodata.element"/>
+          </optional>
+          <optional>
+            <ref name="tfmatr.element"/>
+          </optional>
+          <zeroOrMore>
+            <ref name="topic.element"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="graphic.element"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="para.element"/>
+          </zeroOrMore>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="task.attlist" combine="interleave">
+    <optional>
+      <attribute name="chappref"/>
+    </optional>
+    <attribute name="chapnbr"/>
+    <attribute name="sectnbr"/>
+    <attribute name="subjnbr"/>
+    <attribute name="func"/>
+    <attribute name="seq"/>
+    <optional>
+      <attribute name="confltr"/>
+    </optional>
+    <optional>
+      <attribute name="varnbr"/>
+    </optional>
+    <optional>
+      <attribute name="alunqi"/>
+    </optional>
+    <attribute name="pgblknbr"/>
+    <optional>
+      <attribute name="confnbr"/>
+    </optional>
+    <ref name="revatt"/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- TASK ASSOCIATED DATA -->
+  <!-- =========================================================== -->
+  <define name="assodata.element">
+    <element name="assodata">
+      <ref name="assodata.attlist"/>
+      <optional>
+        <ref name="zonelst.element"/>
+      </optional>
+      <optional>
+        <ref name="einlst.element"/>
+      </optional>
+      <optional>
+        <ref name="taskreq.element"/>
+      </optional>
+      <optional>
+        <ref name="elapstim.element"/>
+      </optional>
+      <optional>
+        <ref name="manhour.element"/>
+      </optional>
+      <optional>
+        <ref name="nbrpers.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="assodata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="einlst.element">
+    <element name="einlst">
+      <ref name="einlst.attlist"/>
+      <oneOrMore>
+        <ref name="eindata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="einlst.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="eindata.element">
+    <element name="eindata">
+      <ref name="eindata.attlist"/>
+      <ref name="effect.element"/>
+      <ref name="einent"/>
+    </element>
+  </define>
+  <define name="eindata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="zonelst.element">
+    <element name="zonelst">
+      <ref name="zonelst.attlist"/>
+      <oneOrMore>
+        <ref name="zone.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="zonelst.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="taskreq.element">
+    <element name="taskreq">
+      <ref name="taskreq.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="taskreq.attlist" combine="interleave">
+    <optional>
+      <attribute name="mechreq">
+        <choice>
+          <value>mech</value>
+          <value>nomech</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="panreq">
+        <choice>
+          <value>pan</value>
+          <value>nopan</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="tedreq">
+        <choice>
+          <value>ted</value>
+          <value>noted</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="elapstim.element">
+    <element name="elapstim">
+      <ref name="elapstim.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="elapstim.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="manhour.element">
+    <element name="manhour">
+      <ref name="manhour.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="manhour.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="nbrpers.element">
+    <element name="nbrpers">
+      <ref name="nbrpers.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="nbrpers.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- TASK ASSOCIATED ELEMENTS -->
+  <!-- =========================================================== -->
+  <define name="tfmatr.element">
+    <element name="tfmatr">
+      <ref name="tfmatr.attlist"/>
+      <oneOrMore>
+        <ref name="pretopic.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="tfmatr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="pretopic.element">
+    <element name="pretopic">
+      <ref name="pretopic.attlist"/>
+      <ref name="title.element"/>
+      <oneOrMore>
+        <choice>
+          <ref name="text"/>
+          <ref name="list1.element"/>
+        </choice>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="pretopic.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="topic.element">
+    <element name="topic">
+      <ref name="topic.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="title.element"/>
+      <ref name="g.r"/>
+      <ref name="w.c"/>
+      <zeroOrMore>
+        <ref name="note.element"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="subtask.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="topic.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!-- =========================================================== -->
+  <!-- SUBTASK -->
+  <!-- =========================================================== -->
+  <define name="subtask.element">
+    <element name="subtask">
+      <ref name="subtask.attlist"/>
+      <choice>
+        <group>
+          <ref name="effect.element"/>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <ref name="g.r"/>
+          <ref name="w.c"/>
+          <zeroOrMore>
+            <ref name="note.element"/>
+          </zeroOrMore>
+          <ref name="list1.element"/>
+        </group>
+        <oneOrMore>
+          <ref name="deleted"/>
+        </oneOrMore>
+      </choice>
+    </element>
+  </define>
+  <define name="subtask.attlist" combine="interleave">
+    <optional>
+      <attribute name="chappref"/>
+    </optional>
+    <attribute name="chapnbr"/>
+    <attribute name="sectnbr"/>
+    <attribute name="subjnbr"/>
+    <attribute name="func"/>
+    <attribute name="seq"/>
+    <optional>
+      <attribute name="confltr"/>
+    </optional>
+    <optional>
+      <attribute name="varnbr"/>
+    </optional>
+    <optional>
+      <attribute name="alunqi"/>
+    </optional>
+    <attribute name="pgblknbr"/>
+    <optional>
+      <attribute name="confnbr"/>
+    </optional>
+    <ref name="revatt"/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- PROCEDURE(INC D&O) LIST STRUCTURE -->
+  <!-- =========================================================== -->
+  <define name="prclist1.element">
+    <element name="prclist1">
+      <ref name="prclist1.attlist"/>
+      <oneOrMore>
+        <ref name="prcitem1.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="prclist1.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prclist2.element">
+    <element name="prclist2">
+      <ref name="prclist2.attlist"/>
+      <oneOrMore>
+        <ref name="prcitem2.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="prclist2.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prclist3.element">
+    <element name="prclist3">
+      <ref name="prclist3.attlist"/>
+      <oneOrMore>
+        <ref name="prcitem3.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="prclist3.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prclist4.element">
+    <element name="prclist4">
+      <ref name="prclist4.attlist"/>
+      <oneOrMore>
+        <ref name="prcitem4.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="prclist4.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prclist5.element">
+    <element name="prclist5">
+      <ref name="prclist5.attlist"/>
+      <oneOrMore>
+        <ref name="prcitem5.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="prclist5.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prclist6.element">
+    <element name="prclist6">
+      <ref name="prclist6.attlist"/>
+      <oneOrMore>
+        <ref name="prcitem6.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="prclist6.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prclist7.element">
+    <element name="prclist7">
+      <ref name="prclist7.attlist"/>
+      <oneOrMore>
+        <ref name="prcitem7.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="prclist7.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem1.element">
+    <element name="prcitem1">
+      <ref name="prcitem1.attlist"/>
+      <ref name="prcitem.element"/>
+      <optional>
+        <ref name="prclist2.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="graphic.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="prcitem1.attlist" combine="interleave">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem2.element">
+    <element name="prcitem2">
+      <ref name="prcitem2.attlist"/>
+      <ref name="prcitem.element"/>
+      <optional>
+        <ref name="prclist3.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="graphic.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="prcitem2.attlist" combine="interleave">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem3.element">
+    <element name="prcitem3">
+      <ref name="prcitem3.attlist"/>
+      <ref name="prcitem.element"/>
+      <optional>
+        <ref name="prclist4.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="graphic.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="prcitem3.attlist" combine="interleave">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem4.element">
+    <element name="prcitem4">
+      <ref name="prcitem4.attlist"/>
+      <ref name="prcitem.element"/>
+      <optional>
+        <ref name="prclist5.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="graphic.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="prcitem4.attlist" combine="interleave">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem5.element">
+    <element name="prcitem5">
+      <ref name="prcitem5.attlist"/>
+      <ref name="prcitem.element"/>
+      <optional>
+        <ref name="prclist6.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="graphic.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="prcitem5.attlist" combine="interleave">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem6.element">
+    <element name="prcitem6">
+      <ref name="prcitem6.attlist"/>
+      <ref name="prcitem.element"/>
+      <optional>
+        <ref name="prclist7.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="graphic.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="prcitem6.attlist" combine="interleave">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem7.element">
+    <element name="prcitem7">
+      <ref name="prcitem7.attlist"/>
+      <ref name="prcitem.element"/>
+    </element>
+  </define>
+  <define name="prcitem7.attlist" combine="interleave">
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="prcitem.element">
+    <element name="prcitem">
+      <ref name="prcitem.attlist"/>
+      <optional>
+        <ref name="title.element"/>
+      </optional>
+      <zeroOrMore>
+        <choice>
+          <ref name="w.c"/>
+          <ref name="text"/>
+          <ref name="equlst.element"/>
+          <ref name="cblst.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="prcitem.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- STANDARD LISTS -->
+  <!-- =========================================================== -->
+  <define name="list1.element">
+    <element name="list1">
+      <ref name="list1.attlist"/>
+      <oneOrMore>
+        <ref name="w.c"/>
+        <ref name="l1item.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="list1.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="list2.element">
+    <element name="list2">
+      <ref name="list2.attlist"/>
+      <optional>
+        <ref name="ltitle.element"/>
+      </optional>
+      <oneOrMore>
+        <zeroOrMore>
+          <ref name="w.c"/>
+        </zeroOrMore>
+        <ref name="l2item.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="list2.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="list3.element">
+    <element name="list3">
+      <ref name="list3.attlist"/>
+      <oneOrMore>
+        <ref name="w.c"/>
+        <ref name="l3item.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="list3.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="list4.element">
+    <element name="list4">
+      <ref name="list4.attlist"/>
+      <oneOrMore>
+        <ref name="w.c"/>
+        <ref name="l4item.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="list4.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="list5.element">
+    <element name="list5">
+      <ref name="list5.attlist"/>
+      <oneOrMore>
+        <ref name="w.c"/>
+        <ref name="l5item.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="list5.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="list6.element">
+    <element name="list6">
+      <ref name="list6.attlist"/>
+      <oneOrMore>
+        <ref name="w.c"/>
+        <ref name="l6item.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="list6.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="list7.element">
+    <element name="list7">
+      <ref name="list7.attlist"/>
+      <oneOrMore>
+        <ref name="w.c"/>
+        <ref name="l7item.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="list7.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="l1item.element">
+    <element name="l1item">
+      <ref name="l1item.attlist"/>
+      <ref name="text"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="cblst.element"/>
+          <ref name="list2.element"/>
+          <ref name="art.element"/>
+        </choice>
+        <zeroOrMore>
+          <ref name="note.element"/>
+        </zeroOrMore>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="l1item.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="l2item.element">
+    <element name="l2item">
+      <ref name="l2item.attlist"/>
+      <ref name="text"/>
+      <optional>
+        <ref name="list3.element"/>
+        <zeroOrMore>
+          <ref name="note.element"/>
+        </zeroOrMore>
+      </optional>
+    </element>
+  </define>
+  <define name="l2item.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="l3item.element">
+    <element name="l3item">
+      <ref name="l3item.attlist"/>
+      <ref name="text"/>
+      <optional>
+        <ref name="list4.element"/>
+        <zeroOrMore>
+          <ref name="note.element"/>
+        </zeroOrMore>
+      </optional>
+    </element>
+  </define>
+  <define name="l3item.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="l4item.element">
+    <element name="l4item">
+      <ref name="l4item.attlist"/>
+      <ref name="text"/>
+      <optional>
+        <ref name="list5.element"/>
+        <zeroOrMore>
+          <ref name="note.element"/>
+        </zeroOrMore>
+      </optional>
+    </element>
+  </define>
+  <define name="l4item.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="l5item.element">
+    <element name="l5item">
+      <ref name="l5item.attlist"/>
+      <ref name="text"/>
+      <optional>
+        <ref name="list6.element"/>
+        <zeroOrMore>
+          <ref name="note.element"/>
+        </zeroOrMore>
+      </optional>
+    </element>
+  </define>
+  <define name="l5item.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="l6item.element">
+    <element name="l6item">
+      <ref name="l6item.attlist"/>
+      <ref name="text"/>
+      <optional>
+        <ref name="list7.element"/>
+        <zeroOrMore>
+          <ref name="note.element"/>
+        </zeroOrMore>
+      </optional>
+    </element>
+  </define>
+  <define name="l6item.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="l7item.element">
+    <element name="l7item">
+      <ref name="l7item.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="l7item.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- ACTION RESULT TABLE -->
+  <!-- =========================================================== -->
+  <define name="art.element">
+    <element name="art">
+      <ref name="art.attlist"/>
+      <optional>
+        <ref name="ltitle.element"/>
+      </optional>
+      <oneOrMore>
+        <ref name="w.c"/>
+        <zeroOrMore>
+          <ref name="note.element"/>
+        </zeroOrMore>
+        <ref name="action.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="art.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="action.element">
+    <element name="action">
+      <ref name="action.attlist"/>
+      <ref name="text"/>
+      <zeroOrMore>
+        <ref name="result.element"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="action.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="result.element">
+    <element name="result">
+      <ref name="result.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="result.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- DATA ASSOCIATED TO EQUIPMENTS -->
+  <!-- =========================================================== -->
+  <define name="equlst.element">
+    <element name="equlst">
+      <ref name="equlst.attlist"/>
+      <oneOrMore>
+        <ref name="equdata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="equlst.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="equdata.element">
+    <element name="equdata">
+      <ref name="equdata.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="einent"/>
+      <ref name="equname.element"/>
+      <optional>
+        <ref name="sftlst.element"/>
+      </optional>
+      <optional>
+        <ref name="zone.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="pan.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="atanbr.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="equdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="equname.element">
+    <element name="equname">
+      <ref name="equname.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="equname.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="sftlst.element">
+    <element name="sftlst">
+      <ref name="sftlst.attlist"/>
+      <oneOrMore>
+        <ref name="sftdata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="sftlst.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="sftdata.element">
+    <element name="sftdata">
+      <ref name="sftdata.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="einent"/>
+      <ref name="equname.element"/>
+      <optional>
+        <ref name="atanbr.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="sftdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- CIRCUIT BREAKER TABLE -->
+  <!-- =========================================================== -->
+  <define name="cblst.element">
+    <element name="cblst">
+      <ref name="cblst.attlist"/>
+      <oneOrMore>
+        <ref name="cbsublst.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="cblst.attlist" combine="interleave">
+    <optional>
+      <attribute name="chksum"/>
+    </optional>
+    <optional>
+      <attribute name="action"/>
+    </optional>
+  </define>
+  <define name="cbsublst.element">
+    <element name="cbsublst">
+      <ref name="cbsublst.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="einent"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="cbdata.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="cbsublst.attlist" combine="interleave">
+    <optional>
+      <attribute name="chksum"/>
+    </optional>
+  </define>
+  <define name="cbdata.element">
+    <element name="cbdata">
+      <ref name="cbdata.attlist"/>
+      <optional>
+        <ref name="effect.element"/>
+      </optional>
+      <ref name="cb.element"/>
+      <ref name="cbname.element"/>
+      <optional>
+        <ref name="pan.element"/>
+      </optional>
+      <optional>
+        <ref name="cbloc.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="cbdata.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cbname.element">
+    <element name="cbname">
+      <ref name="cbname.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cbname.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cbloc.element">
+    <element name="cbloc">
+      <ref name="cbloc.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cbloc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- TABLE (CELLULAR, CALS BASED) -->
+  <!-- =========================================================== -->
+  <define name="table.element">
+    <element name="table">
+      <ref name="table.attlist"/>
+      <choice>
+        <zeroOrMore>
+          <optional>
+            <ref name="title.element"/>
+          </optional>
+          <ref name="tgroup.element"/>
+          <zeroOrMore>
+            <ref name="ftnote.element"/>
+          </zeroOrMore>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="graphic.element"/>
+        </zeroOrMore>
+      </choice>
+    </element>
+  </define>
+  <define name="table.attlist" combine="interleave">
+    <optional>
+      <attribute name="tabstyle"/>
+    </optional>
+    <optional>
+      <attribute name="frame">
+        <choice>
+          <value>top</value>
+          <value>bottom</value>
+          <value>topbot</value>
+          <value>all</value>
+          <value>sides</value>
+          <value>none</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="colsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rowsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="orient">
+        <choice>
+          <value>port</value>
+          <value>land</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="pgwide">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="id">
+        <data type="ID"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="tgroup.element">
+    <element name="tgroup">
+      <ref name="tgroup.attlist"/>
+      <zeroOrMore>
+        <ref name="colspec.element"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="spanspec.element"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="thead.element"/>
+      </optional>
+      <optional>
+        <ref name="tfoot.element"/>
+      </optional>
+      <ref name="tbody.element"/>
+    </element>
+  </define>
+  <define name="tgroup.attlist" combine="interleave">
+    <attribute name="cols"/>
+    <optional>
+      <attribute name="colsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rowsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="align" a:defaultValue="left">
+        <choice>
+          <value>left</value>
+          <value>right</value>
+          <value>center</value>
+          <value>justify</value>
+          <value>char</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="charoff" a:defaultValue="50"/>
+    </optional>
+    <optional>
+      <attribute name="char" a:defaultValue=""/>
+    </optional>
+  </define>
+  <define name="colspec.element">
+    <element name="colspec">
+      <ref name="colspec.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="colspec.attlist" combine="interleave">
+    <optional>
+      <attribute name="colnum"/>
+    </optional>
+    <optional>
+      <attribute name="colname"/>
+    </optional>
+    <optional>
+      <attribute name="align">
+        <choice>
+          <value>left</value>
+          <value>right</value>
+          <value>center</value>
+          <value>justify</value>
+          <value>char</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="charoff"/>
+    </optional>
+    <optional>
+      <attribute name="char"/>
+    </optional>
+    <optional>
+      <attribute name="colwidth"/>
+    </optional>
+    <optional>
+      <attribute name="colsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rowsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="spanspec.element">
+    <element name="spanspec">
+      <ref name="spanspec.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="spanspec.attlist" combine="interleave">
+    <attribute name="namest"/>
+    <attribute name="nameend"/>
+    <optional>
+      <attribute name="spanname"/>
+    </optional>
+    <optional>
+      <attribute name="align" a:defaultValue="center">
+        <choice>
+          <value>left</value>
+          <value>right</value>
+          <value>center</value>
+          <value>justify</value>
+          <value>char</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="charoff"/>
+    </optional>
+    <optional>
+      <attribute name="char"/>
+    </optional>
+    <optional>
+      <attribute name="colsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rowsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="thead.element">
+    <element name="thead">
+      <ref name="thead.attlist"/>
+      <zeroOrMore>
+        <ref name="colspec.element"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="row.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="thead.attlist" combine="interleave">
+    <optional>
+      <attribute name="valign" a:defaultValue="bottom">
+        <choice>
+          <value>top</value>
+          <value>middle</value>
+          <value>bottom</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="tfoot.element">
+    <element name="tfoot">
+      <ref name="tfoot.attlist"/>
+      <zeroOrMore>
+        <ref name="colspec.element"/>
+      </zeroOrMore>
+      <oneOrMore>
+        <ref name="row.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="tfoot.attlist" combine="interleave">
+    <optional>
+      <attribute name="valign" a:defaultValue="top">
+        <choice>
+          <value>top</value>
+          <value>middle</value>
+          <value>bottom</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="tbody.element">
+    <element name="tbody">
+      <ref name="tbody.attlist"/>
+      <oneOrMore>
+        <ref name="row.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="tbody.attlist" combine="interleave">
+    <optional>
+      <attribute name="valign" a:defaultValue="top">
+        <choice>
+          <value>top</value>
+          <value>middle</value>
+          <value>bottom</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="row.element">
+    <element name="row">
+      <ref name="row.attlist"/>
+      <oneOrMore>
+        <ref name="entry.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="row.attlist" combine="interleave">
+    <optional>
+      <attribute name="rowsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="entry.element">
+    <element name="entry">
+      <ref name="entry.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="para.element"/>
+          <ref name="table.element"/>
+          <ref name="unlist.element"/>
+          <ref name="numlist.element"/>
+          <ref name="note.element"/>
+          <ref name="warning.element"/>
+          <ref name="caution.element"/>
+          <ref name="graphic.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="entry.attlist" combine="interleave">
+    <optional>
+      <attribute name="colname"/>
+    </optional>
+    <optional>
+      <attribute name="namest"/>
+    </optional>
+    <optional>
+      <attribute name="nameend"/>
+    </optional>
+    <optional>
+      <attribute name="spanname"/>
+    </optional>
+    <optional>
+      <attribute name="morerows" a:defaultValue="0"/>
+    </optional>
+    <optional>
+      <attribute name="colsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rowsep">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="rotate" a:defaultValue="0">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="valign" a:defaultValue="top">
+        <choice>
+          <value>top</value>
+          <value>middle</value>
+          <value>bottom</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="align">
+        <choice>
+          <value>left</value>
+          <value>right</value>
+          <value>center</value>
+          <value>justify</value>
+          <value>char</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="charoff"/>
+    </optional>
+    <optional>
+      <attribute name="char"/>
+    </optional>
+  </define>
+  <define name="ftnote.element">
+    <element name="ftnote">
+      <ref name="ftnote.attlist"/>
+      <ref name="text"/>
+    </element>
+  </define>
+  <define name="ftnote.attlist" combine="interleave">
+    <attribute name="ftnoteid">
+      <data type="ID"/>
+    </attribute>
+  </define>
+  <!-- =========================================================== -->
+  <!-- REFERENCE BLOCK and GRAPHIC REFERENCING MECHANISMS -->
+  <!-- =========================================================== -->
+  <define name="refblock.element">
+    <element name="refblock">
+      <ref name="refblock.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="refint.element"/>
+          <ref name="refext.element"/>
+          <ref name="grphcref.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="refblock.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="grphcref.element">
+    <element name="grphcref">
+      <ref name="grphcref.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="grphcref.attlist" combine="interleave">
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="sheetnbr"/>
+    </optional>
+    <optional>
+      <attribute name="structid"/>
+    </optional>
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="shownow" a:defaultValue="0">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="graphic.element">
+    <element name="graphic">
+      <ref name="graphic.attlist"/>
+      <choice>
+        <group>
+          <ref name="effect.element"/>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <optional>
+            <ref name="title.element"/>
+          </optional>
+          <oneOrMore>
+            <ref name="sheet.element"/>
+          </oneOrMore>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="graphic.attlist" combine="interleave">
+    <optional>
+      <attribute name="chappref"/>
+    </optional>
+    <optional>
+      <attribute name="chapnbr"/>
+    </optional>
+    <optional>
+      <attribute name="sectnbr"/>
+    </optional>
+    <optional>
+      <attribute name="subjnbr"/>
+    </optional>
+    <optional>
+      <attribute name="func"/>
+    </optional>
+    <optional>
+      <attribute name="seq"/>
+    </optional>
+    <optional>
+      <attribute name="confltr"/>
+    </optional>
+    <optional>
+      <attribute name="varnbr"/>
+    </optional>
+    <optional>
+      <attribute name="alunqi"/>
+    </optional>
+    <optional>
+      <attribute name="pgblknbr"/>
+    </optional>
+    <optional>
+      <attribute name="confnbr"/>
+    </optional>
+    <ref name="revatt"/>
+  </define>
+  <define name="sheet.element">
+    <element name="sheet">
+      <ref name="sheet.attlist"/>
+      <choice>
+        <group>
+          <ref name="effect.element"/>
+          <zeroOrMore>
+            <ref name="chgdesc.element"/>
+          </zeroOrMore>
+          <optional>
+            <ref name="title.element"/>
+          </optional>
+          <optional>
+            <ref name="gdesc.element"/>
+          </optional>
+        </group>
+        <ref name="deleted"/>
+      </choice>
+    </element>
+  </define>
+  <define name="sheet.attlist" combine="interleave">
+    <optional>
+      <attribute name="fileref"/>
+    </optional>
+    <optional>
+      <attribute name="gnbr">
+        <data type="ENTITY"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="cfnbr">
+        <data type="ENTITY"/>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="sheetnbr"/>
+    </optional>
+    <optional>
+      <attribute name="imgarea">
+        <choice>
+          <value>AP</value>
+          <value>BP</value>
+          <value>CP</value>
+          <value>DL</value>
+          <value>EL</value>
+          <value>FP</value>
+          <value>GP</value>
+          <value>HL</value>
+          <value>IL</value>
+        </choice>
+      </attribute>
+    </optional>
+    <ref name="revatt"/>
+  </define>
+  <define name="gdesc.element">
+    <element name="gdesc">
+      <ref name="gdesc.attlist"/>
+      <choice>
+        <ref name="unlist.element"/>
+        <ref name="numlist.element"/>
+      </choice>
+    </element>
+  </define>
+  <define name="gdesc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- =========================================================== -->
+  <!-- NUMBERED & UN-NUMBERED LIST -->
+  <!-- =========================================================== -->
+  <define name="unlist.element">
+    <element name="unlist">
+      <ref name="unlist.attlist"/>
+      <oneOrMore>
+        <ref name="unlitem.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="unlist.attlist" combine="interleave">
+    <optional>
+      <attribute name="bulltype" a:defaultValue="NDASH">
+        <choice>
+          <value>NONE</value>
+          <value>BULLET</value>
+          <value>NDASH</value>
+          <value>MDASH</value>
+          <value>DIAMOND</value>
+          <value>ASTERISK</value>
+          <value>DELTA</value>
+          <value>SQUARE</value>
+          <value>SYSTEM</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="unlitem.element">
+    <element name="unlitem">
+      <ref name="unlitem.attlist"/>
+      <oneOrMore>
+        <ref name="para.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="unlitem.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="numlist.element">
+    <element name="numlist">
+      <ref name="numlist.attlist"/>
+      <oneOrMore>
+        <ref name="numlitem.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="numlist.attlist" combine="interleave">
+    <optional>
+      <attribute name="numtype" a:defaultValue="NNP">
+        <choice>
+          <value>NNP</value>
+          <value>AUP</value>
+          <value>NNB</value>
+          <value>ALB</value>
+          <value>NNS</value>
+          <value>RUP</value>
+          <value>RLP</value>
+          <value>RUR</value>
+          <value>RLR</value>
+          <value>NNR</value>
+          <value>AUR</value>
+          <value>ALR</value>
+        </choice>
+      </attribute>
+    </optional>
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="numlitem.element">
+    <element name="numlitem">
+      <ref name="numlitem.attlist"/>
+      <oneOrMore>
+        <ref name="para.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="numlitem.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!-- Paragraph Elements -->
+  <define name="para.element">
+    <element name="para">
+      <ref name="para.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="cb.element"/>
+          <ref name="con.element"/>
+          <ref name="csn.element"/>
+          <ref name="equ.element"/>
+          <ref name="grphcref.element"/>
+          <ref name="ein.element"/>
+          <ref name="einmfr.element"/>
+          <ref name="ncon.element"/>
+          <ref name="pan.element"/>
+          <ref name="refext.element"/>
+          <ref name="refint.element"/>
+          <ref name="sub.element"/>
+          <ref name="super.element"/>
+          <ref name="ted.element"/>
+          <ref name="toc.element"/>
+          <ref name="txtgrphc.element"/>
+          <ref name="std.element"/>
+          <ref name="zone.element"/>
+          <ref name="expd.element"/>
+          <ref name="stdname.element"/>
+          <ref name="tor.element"/>
+          <ref name="refblock.element"/>
+          <ref name="toolnbr.element"/>
+          <ref name="refmedia.element"/>
+          <ref name="grsymbol.element"/>
+          <ref name="txtcolor.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="para.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!-- =========================================================== -->
+  <!-- PARAGRAPH CONTENTS -->
+  <!-- =========================================================== -->
+  <define name="cb.element">
+    <element name="cb">
+      <ref name="cb.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="cb.attlist" combine="interleave">
+    <optional>
+      <attribute name="cbtype"/>
+    </optional>
+    <optional>
+      <attribute name="action"/>
+    </optional>
+    <optional>
+      <attribute name="chksum"/>
+    </optional>
+  </define>
+  <define name="con.element">
+    <element name="con">
+      <ref name="con.attlist"/>
+      <ref name="connbr.element"/>
+      <optional>
+        <ref name="conname.element"/>
+      </optional>
+      <optional>
+        <ref name="refint.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="con.attlist" combine="interleave">
+    <optional>
+      <attribute name="contype"/>
+    </optional>
+    <optional>
+      <attribute name="hazd">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="connbr.element">
+    <element name="connbr">
+      <ref name="connbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="connbr.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="conname.element">
+    <element name="conname">
+      <ref name="conname.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="conname.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="csn.element">
+    <element name="csn">
+      <ref name="csn.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="csn.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="einmfr.element">
+    <element name="einmfr">
+      <ref name="einmfr.attlist"/>
+      <ref name="ein.element"/>
+      <optional>
+        <ref name="mfr.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="einmfr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="ein.element">
+    <element name="ein">
+      <ref name="ein.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="ein.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="equ.element">
+    <element name="equ">
+      <ref name="equ.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="sub.element"/>
+          <ref name="super.element"/>
+          <ref name="fd.element"/>
+          <ref name="f.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="equ.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="ncon.element">
+    <element name="ncon">
+      <ref name="ncon.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="ncon.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="pan.element">
+    <element name="pan">
+      <ref name="pan.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="pan.attlist" combine="interleave">
+    <optional>
+      <attribute name="pantype"/>
+    </optional>
+  </define>
+  <define name="refext.element">
+    <element name="refext">
+      <ref name="refext.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="refext.attlist" combine="interleave">
+    <optional>
+      <attribute name="refman"/>
+    </optional>
+    <optional>
+      <attribute name="refspl"/>
+    </optional>
+    <optional>
+      <attribute name="refmodel"/>
+    </optional>
+    <optional>
+      <attribute name="docnbr"/>
+    </optional>
+    <optional>
+      <attribute name="refloc"/>
+    </optional>
+  </define>
+  <define name="refint.element">
+    <element name="refint">
+      <ref name="refint.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="refint.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="refmedia.element">
+    <element name="refmedia">
+      <ref name="refmedia.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="refmedia.attlist" combine="interleave">
+    <attribute name="mednbr">
+      <data type="ENTITY"/>
+    </attribute>
+  </define>
+  <define name="grsymbol.element">
+    <element name="grsymbol">
+      <ref name="grsymbol.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="grsymbol.attlist" combine="interleave">
+    <attribute name="gnbr">
+      <data type="ENTITY"/>
+    </attribute>
+    <optional>
+      <attribute name="reprowid"/>
+    </optional>
+    <optional>
+      <attribute name="reprohgt"/>
+    </optional>
+    <optional>
+      <attribute name="reproscl"/>
+    </optional>
+  </define>
+  <define name="expd.element">
+    <element name="expd">
+      <ref name="expd.attlist"/>
+      <ref name="csn.element"/>
+      <optional>
+        <ref name="expdname.element"/>
+      </optional>
+      <optional>
+        <ref name="itemnbr.element"/>
+      </optional>
+      <optional>
+        <ref name="grphcref.element"/>
+      </optional>
+    </element>
+  </define>
+  <define name="expd.attlist" combine="interleave">
+    <optional>
+      <attribute name="expdtype"/>
+    </optional>
+  </define>
+  <define name="expdname.element">
+    <element name="expdname">
+      <ref name="expdname.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="expdname.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="itemnbr.element">
+    <element name="itemnbr">
+      <ref name="itemnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="itemnbr.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="std.element">
+    <element name="std">
+      <ref name="std.attlist"/>
+      <oneOrMore>
+        <optional>
+          <ref name="stdnbr.element"/>
+        </optional>
+        <ref name="stdname.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="std.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="stdnbr.element">
+    <element name="stdnbr">
+      <ref name="stdnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="stdnbr.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="stdname.element">
+    <element name="stdname">
+      <ref name="stdname.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="stdname.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="sub.element">
+    <element name="sub">
+      <ref name="sub.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="sub.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="super.element">
+    <element name="super">
+      <ref name="super.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="super.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="ted.element">
+    <element name="ted">
+      <ref name="ted.attlist"/>
+      <oneOrMore>
+        <ref name="toolnbr.element"/>
+        <ref name="toolname.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="ted.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="toolnbr.element">
+    <element name="toolnbr">
+      <ref name="toolnbr.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="toolnbr.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="toolname.element">
+    <element name="toolname">
+      <ref name="toolname.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="toolname.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="tor.element">
+    <element name="tor">
+      <ref name="tor.attlist"/>
+      <oneOrMore>
+        <ref name="torvalue.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="tor.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="torvalue.element">
+    <element name="torvalue">
+      <ref name="torvalue.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="torvalue.attlist" combine="interleave">
+    <attribute name="min"/>
+    <optional>
+      <attribute name="max"/>
+    </optional>
+    <attribute name="unit">
+      <choice>
+        <value>lbf.in</value>
+        <value>lbf.ft</value>
+        <value>m.daN</value>
+        <value>m.N</value>
+      </choice>
+    </attribute>
+  </define>
+  <define name="toc.element">
+    <element name="toc">
+      <ref name="toc.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="toc.attlist" combine="interleave">
+    <optional>
+      <attribute name="readable" a:defaultValue="1">
+        <ref name="yesorno"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="txtgrphc.element">
+    <element name="txtgrphc">
+      <ref name="txtgrphc.attlist"/>
+      <oneOrMore>
+        <ref name="txtline.element"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="txtgrphc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="txtline.element">
+    <element name="txtline">
+      <ref name="txtline.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="txtline.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="zone.element">
+    <element name="zone">
+      <ref name="zone.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="zone.attlist" combine="interleave">
+    <optional>
+      <attribute name="reftype"/>
+    </optional>
+    <optional>
+      <attribute name="refid">
+        <data type="IDREF"/>
+      </attribute>
+    </optional>
+  </define>
+  <define name="txtcolor.element">
+    <element name="txtcolor">
+      <ref name="txtcolor.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="txtcolor.attlist" combine="interleave">
+    <optional>
+      <attribute name="color" a:defaultValue="BLACK">
+        <choice>
+          <value>AMBER</value>
+          <value>BLACK</value>
+          <value>BLUE</value>
+          <value>GREEN</value>
+          <value>RED</value>
+          <value>WHITE</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <!--  =========================================================== -->
+  <!-- TITLE etc -->
+  <!--  =========================================================== -->
+  <define name="title.element">
+    <element name="title">
+      <ref name="title.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <text/>
+          <ref name="ein.element"/>
+          <ref name="einmfr.element"/>
+          <ref name="sbnbr.element"/>
+          <ref name="sub.element"/>
+          <ref name="super.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="title.attlist" combine="interleave">
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="ltitle.element">
+    <element name="ltitle">
+      <ref name="ltitle.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="ltitle.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="warning.element">
+    <element name="warning">
+      <ref name="warning.attlist"/>
+      <ref name="text_wo_note"/>
+    </element>
+  </define>
+  <define name="warning.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="note.element">
+    <element name="note">
+      <ref name="note.attlist"/>
+      <ref name="text_wo_note"/>
+    </element>
+  </define>
+  <define name="note.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="caution.element">
+    <element name="caution">
+      <ref name="caution.attlist"/>
+      <ref name="text_wo_note"/>
+    </element>
+  </define>
+  <define name="caution.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <!--  =========================================================== -->
+  <!-- MISCELLANEOUS CONSTRUCTIONS TO: -->
+  <!-- MARK EFFECTIVITIES AND DOCUMENT UNITS -->
+  <!-- MARK DELETED AND REVISED ELEMENTS -->
+  <!-- SUPPORT CROSS-REFERENCING MECHANISMS -->
+  <!--  =========================================================== -->
+  <define name="effect.element">
+    <element name="effect">
+      <ref name="effect.attlist"/>
+      <zeroOrMore>
+        <choice>
+          <ref name="sbeff.element"/>
+          <ref name="coceff.element"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="effect.attlist" combine="interleave">
+    <optional>
+      <attribute name="effrg"/>
+    </optional>
+    <optional>
+      <attribute name="efftext"/>
+    </optional>
+    <optional>
+      <attribute name="chg">
+        <choice>
+          <value>N</value>
+          <value>R</value>
+          <value>D</value>
+          <value>U</value>
+        </choice>
+      </attribute>
+    </optional>
+  </define>
+  <define name="sbeff.element">
+    <element name="sbeff">
+      <ref name="sbeff.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="sbeff.attlist" combine="interleave">
+    <optional>
+      <attribute name="effrg"/>
+    </optional>
+    <optional>
+      <attribute name="efftext"/>
+    </optional>
+    <attribute name="sbnbr"/>
+    <attribute name="sbcond"/>
+    <optional>
+      <attribute name="sbrev"/>
+    </optional>
+  </define>
+  <define name="coceff.element">
+    <element name="coceff">
+      <ref name="coceff.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="coceff.attlist" combine="interleave">
+    <optional>
+      <attribute name="effrg"/>
+    </optional>
+    <optional>
+      <attribute name="efftext"/>
+    </optional>
+    <attribute name="cocnbr"/>
+    <optional>
+      <attribute name="coccond"/>
+    </optional>
+    <optional>
+      <attribute name="cocrev"/>
+    </optional>
+  </define>
+  <define name="deleted.element">
+    <element name="deleted">
+      <ref name="deleted.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="deleted.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="isempty.element">
+    <element name="isempty">
+      <ref name="isempty.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="isempty.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="revst.element">
+    <element name="revst">
+      <ref name="revst.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="revst.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="revend.element">
+    <element name="revend">
+      <ref name="revend.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="revend.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cocst.element">
+    <element name="cocst">
+      <ref name="cocst.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="cocst.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="cocend.element">
+    <element name="cocend">
+      <ref name="cocend.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="cocend.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="chgdesc.element">
+    <element name="chgdesc">
+      <ref name="chgdesc.attlist"/>
+      <text/>
+    </element>
+  </define>
+  <define name="chgdesc.attlist" combine="interleave">
+    <empty/>
+  </define>
+  <define name="hotlink.element">
+    <element name="hotlink">
+      <ref name="hotlink.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="hotlink.attlist" combine="interleave">
+    <optional>
+      <attribute name="targetid"/>
+    </optional>
+    <optional>
+      <attribute name="targetrefid"/>
+    </optional>
+  </define>
+  <define name="docunit.element">
+    <element name="docunit">
+      <ref name="docunit.attlist"/>
+      <empty/>
+    </element>
+  </define>
+  <define name="docunit.attlist" combine="interleave">
+    <optional>
+      <attribute name="docunbr"/>
+    </optional>
+  </define>
+  <define name="f.element" combine="choice">
+    <notAllowed/>
+  </define>
+  <define name="fd.element" combine="choice">
+    <notAllowed/>
+  </define>
+  <define name="sc.element" combine="choice">
+    <notAllowed/>
+  </define>
+  <start>
+    <choice>
+      <ref name="sca-amm-2.element"/>
+    </choice>
+  </start>
+</grammar>

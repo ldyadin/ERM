@@ -1,0 +1,151 @@
+/* ============================================================================
+doc.css
+CSS module for ERM
+=============================================================================== */
+
+html {
+  font-size:10pt;
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+}
+.informaltable table {
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+.informaltable thead {vertical-align: bottom;}
+.informaltable tbody {vertical-align: top;}
+.informaltable th {
+  font-size: 10pt;
+  border: 1px solid #000;
+}
+.informaltable td {
+  font-size: 10pt;
+  border: 1px solid #000;
+  background: #fff;
+  padding: 6px 6px 6px 6px;
+  color: #000;
+  text-align:left;
+}
+h1 {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  font-weight: bold;
+  font-size: 200%;
+  margin-top: 0;  
+}
+h2 {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 200%;
+  margin-top: 0;  
+}
+h3,h4 {
+  font-family: Verdana, Helvetica, Arial, Sans-serif;
+  background-color:#CC9966;
+  color:black;
+  font-size:120%;
+  padding-left:0.5em;
+}
+.screen, .programlisting {
+  background-color:#e5e5e5;
+  color:black;
+}
+.programlisting {
+  color:#000;
+  font-weight:lighter;
+  white-space: pre-wrap;
+}
+span.hi {
+  color:#000;
+  background-color:#e5e5e5;
+  font-weight:bold;
+}
+
+a.link, a.xref, a.unwrap, a.wrap, a.go, a.parent, a.selectedParent {
+  font-family: "Courier New", monospace;
+  text-decoration: none;
+}
+a.unwrap, a.wrap, a.parent {
+	cursor: pointer;
+	color: blue;
+}
+a.selectedParent {
+	cursor: default;
+	color: black;
+}
+*[data-active="yes"] {color: red !important;}
+
+nav {
+	font-size: 10pt;
+	padding: 5px 0;
+	background-color: #FFF;
+}
+nav.top {border-bottom: 1px solid #555555;}
+nav.bottom {border-top: 1px solid #555555;}
+.doc nav.top {
+	position: fixed;
+	top: 0;
+	left: 8px;
+	right: 8px;
+	-webkit-transform: translateZ(0);
+}
+.compendium nav.top {
+	margin-bottom: 5px;
+	padding-top: 0;
+}
+
+.doc article, .doc .sect1 {
+	top: 75px;
+	left: 8px;
+	right: 8px;
+	bottom: 0px;
+	position: fixed;
+	overflow-y: auto;
+	padding: 0 5px 5px 0;
+	margin-bottom: 1em;
+	-webkit-transform: translateZ(0);
+}
+
+nav table {width: 100%;} 
+nav th {text-align: center;} 
+nav .prev {width: 10%; text-align: left;}
+nav .nav {width: 80%; text-align: center;}
+nav .next {width: 10%; text-align: right;}
+nav .menu {white-space: nowrap;}
+nav .label {white-space: nowrap; text-align: left;}
+nav .select {width: 90%; text-align: left;}
+nav a {white-space: nowrap;}
+nav tr {vertical-align: top;}
+
+.doc .index nav {height: 60px;}
+.doc .index article {top: 90px;}
+.doc .index nav tr {vertical-align: middle;}
+
+.structure {display: none;}
+.tree div>div {margin-left: 20px;}
+article>div:first-of-type {margin-top: 1em;}
+.apb .informaltable thead {background-color: #ccc;}
+.toc tr {vertical-align: top;}
+.toc td {font-size: 10pt;}
+thead th {white-space: nowrap;}
+.sect2:last-of-type, .informaltable {margin-bottom: 1em;}
+.parents {
+	background-color: #EEE;
+	padding: 2px 5px;
+	margin-bottom: .5em;
+}
+.subtitle {font-size: 80%;}
+/* = for compendium = */
+.navheader {
+	border-bottom: 1px solid #555555;
+	padding-bottom: 5px;
+	margin-bottom: 5px;	
+}
+.navfooter {
+	border-top: 1px solid #555555;
+	padding-top: 5px;
+	margin-top: 5px;	
+}
+.navheader table, .navfooter table {width: 100%;} 
+.navheader th, .navfooter th {text-align: center;} 
+.navheader .prev, .navfooter .prev {width: 10%; text-align: left;}
+.navheader .nav, .navfooter .nav {width: 80%; text-align: center;}
+.navheader .next, .navfooter .next {width: 10%; text-align: right;}

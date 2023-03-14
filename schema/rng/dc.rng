@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
+             xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+             xmlns:dc="http://www.purl.org/dc/elements/1.1/"
+             ns="http://www.purl.org/dc/elements/1.1/"
+             datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+	  <a:documentation>
+		Issue number: 4.1
+		Issue date: 2012-03-30
+		Release number: 4.1
+		Release date: 2012-03-30
+		URL: http://www.s1000d.org/S1000D_4-1/xml_schema_flat/dc.xsd
+		Copyright:
+			Copyright (C) 2011 by each of the following organizations:
+			1.  AeroSpace and Defence Industries Associations of Europe - ASD.
+			2.  Ministries of Defence of the member countries of ASD.
+
+			Limitations of Liability:
+
+			1.  This material is provided "As Is" and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.
+			2.  Neither ASD nor any person who has contributed to the creation, revision or maintenance of this material shall be liable for any direct, indirect, special or consequential damages or any other liability arising from any use of this material.
+			3.  Revisions to this document may occur after its issuance.  The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable. 
+		
+		Remarks: none
+	</a:documentation>
+	  <rng:define name="title">
+      <rng:element name="title">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="creator">
+      <rng:element name="creator">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="subject">
+      <rng:element name="subject">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="publisher">
+      <rng:element name="publisher">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="contributor">
+      <rng:element name="contributor">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="date">
+      <rng:element name="date">
+         <rng:data type="date"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="type">
+      <rng:element name="type">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="format">
+      <rng:element name="format">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="identifier">
+      <rng:element name="identifier">
+         <rng:data type="string"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="language">
+      <rng:element name="language">
+         <rng:ref name="dc:LANGUAGE-COUNTRY"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="rights">
+      <rng:element name="rights">
+         <rng:ref name="dc:SECURITY"/>
+      </rng:element>
+   </rng:define>
+	  <rng:define name="DCMES">
+		    <rng:choice>
+			      <rng:ref name="dc:title"/>
+			      <rng:ref name="dc:creator"/>
+			      <rng:ref name="dc:subject"/>
+			      <rng:ref name="dc:publisher"/>
+			      <rng:ref name="dc:contributor"/>
+			      <rng:ref name="dc:date"/>
+			      <rng:ref name="dc:type"/>
+			      <rng:ref name="dc:format"/>
+			      <rng:ref name="dc:identifier"/>
+			      <rng:ref name="dc:language"/>
+			      <rng:ref name="dc:rights"/>
+		    </rng:choice>
+	  </rng:define>
+	  <rng:define name="SECURITY">
+		    <rng:data type="string">
+         <rng:param name="pattern">[0-9]{1,2}((_cc[0-9]{2})?(_cv[0-9]{2})?)?</rng:param>
+      </rng:data>
+	  </rng:define>
+	  <rng:define name="LANGUAGE-COUNTRY">
+		    <rng:data type="string">
+         <rng:param name="pattern">[a-z]{2,3}(-[A-Z]{2})?</rng:param>
+      </rng:data>
+	  </rng:define>
+</rng:grammar>
