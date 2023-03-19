@@ -1,12 +1,12 @@
 @echo off
 
 echo Deleting previously generated files
-rmdir ..\schema\rng /S /Q
-rmdir temp /S /Q
-del html\*.html /Q
+@REM rmdir ..\schema\rng /S /Q
+@REM rmdir temp /S /Q
+@REM del html\*.html /Q
 
 echo Generating RNG files
-java -cp saxon\saxon9he.jar; net.sf.saxon.Transform -s:schema/file_list.xml -xsl:script/XSDtoRNG.xsl
+java -cp saxon\saxon9he.jar; net.sf.saxon.Transform -o:schema/rng/brex.rng -s:schema/xsd/brex.xsd -xsl:script/XSDtoRNG.xsl
 
 echo Processing RNG
 java -cp saxon\saxon9he.jar; net.sf.saxon.Transform -o:temp/simple1.xml -s:schema/file_list.xml -xsl:script/make-simple.xsl

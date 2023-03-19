@@ -192,7 +192,7 @@
 					<h1><xsl:value-of select="$main_title"/> - Element Tree</h1>
 		            <div class="structure"> <!-- invisible list of all elements' content models -->
 						<xsl:for-each select=".//sect1">
-							<xsl:variable name="attributes" select="concat('&lt;', string-join(.//sect2[title eq 'Attributes']//row/entry[1]/sgmltag/text() ,'&#xA0;&#xA0;') ,'&gt;')"></xsl:variable>
+							<xsl:variable name="attributes" select="concat('attributes: ', string-join(.//sect2[title eq 'Attributes']//row/entry[1]/sgmltag/text() ,',&#xA0;'))"></xsl:variable>
 							<div id="{concat(@xreflabel,'_parents')}">
 								<xsl:for-each select="sect2[title eq 'Parent Elements']//xref">
 									<xsl:variable name="element" select="//sect1[@id eq current()/@linkend]"/>
@@ -239,7 +239,7 @@
 							<xsl:variable name="CM">
 								<xsl:apply-templates select="sect2[title eq 'Content Model']/para" mode="CM"/>
 							</xsl:variable>
-							<xsl:variable name="attributes" select="concat('&lt;', string-join(.//sect2[title eq 'Attributes']//row/entry[1]/sgmltag/text() ,'&#xA0;&#xA0;') ,'&gt;')"></xsl:variable>
+							<xsl:variable name="attributes" select="concat('attributes: ', string-join(.//sect2[title eq 'Attributes']//row/entry[1]/sgmltag/text() ,',&#xA0;'))"></xsl:variable>
 							<xsl:variable name="elementname" select="title"/>
 							<xsl:variable name="title" select="concat(para,'&#10;',normalize-space($CM))"/>
 							<div>

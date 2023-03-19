@@ -4,9 +4,12 @@
 				xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 				xmlns:rng="http://relaxng.org/ns/structure/1.0" 
 				xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" 
+				xpath-default-namespace="http://www.w3.org/2001/XMLSchema"
 				exclude-result-prefixes="xs">
+
 	<xsl:output indent="yes" method="xml"/>
 	<xsl:preserve-space elements="*"/>
+
 	<!--choice for batch or individual file processing-->
 	<xsl:template match="/">
 		<xsl:choose>
@@ -26,9 +29,7 @@
 							</xsl:result-document>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:message>  File
-								<xsl:value-of select="$xsd-url"/> wasn't found
-							</xsl:message>
+							<xsl:message>  File	<xsl:value-of select="$xsd-url"/> wasn't found</xsl:message>
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:for-each>
@@ -38,6 +39,7 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
 	<xsl:template match="/xs:schema">
 		<rng:grammar>
 			<xsl:for-each select="namespace::*">
@@ -45,178 +47,26 @@
 					<xsl:copy/>
 				</xsl:if>
 			</xsl:for-each>
-			<xsl:attribute name="ns">
-				<xsl:value-of select="@targetNamespace"/>
-			</xsl:attribute>
+			<xsl:if test="@targetNamespace">
+				<xsl:attribute name="ns">
+					<xsl:value-of select="@targetNamespace"/>
+				</xsl:attribute>
+			</xsl:if>
 			<xsl:attribute name="datatypeLibrary">http://www.w3.org/2001/XMLSchema-datatypes</xsl:attribute>
 			<xsl:apply-templates/>
 		</rng:grammar>
 	</xsl:template>
-	<!-- in order to manage occurrences (and default) attributes goes there
-		 before going to mode="content" templates -->
+
+	<!-- in order to manage occurrences (and default) attributes goes there before going to mode="content" templates -->
 	<xsl:template match="xs:*">
 		<xsl:call-template name="occurrences"/>
 	</xsl:template>
+
 	<xsl:template match="comment()">
 		<xsl:copy/>
 	</xsl:template>
-	<!-- unique and key are not supported in RelaxNG, must be done in schematron -->
-	<xsl:template match="xs:unique|xs:key"/>
-	<xsl:template match="xs:annotation">
-		<a:documentation>
-			<xsl:apply-templates/>
-		</a:documentation>
-	</xsl:template>
-	<xsl:template match="xs:documentation">
-		<xsl:copy-of select="child::node()"/>
-	</xsl:template>
-	<xsl:template match="xs:appinfo">
-		<xsl:copy-of select="child::node()"/>
-	</xsl:template>
-	<xsl:template match="xs:union">
-		<rng:choice>
-			<xsl:apply-templates select="@memberTypes"/>
-			<xsl:apply-templates/>
-		</rng:choice>
-	</xsl:template>
-	<xsl:template match="@memberTypes">
-		<xsl:call-template name="declareMemberTypes">
-			<xsl:with-param name="memberTypes" select="."/>
-		</xsl:call-template>
-	</xsl:template>
-	<xsl:template match="xs:list">
-		<rng:list>
-			<xsl:apply-templates select="@itemType"/>
-			<xsl:apply-templates/>
-		</rng:list>
-	</xsl:template>
-	<xsl:template match="@itemType">
-		<xsl:call-template name="type">
-			<xsl:with-param name="type" select="."/>
-		</xsl:call-template>
-	</xsl:template>
-	<xsl:template match="xs:complexType[@name]|xs:simpleType[@name]|xs:group[@name]|xs:attributeGroup[@name]">
-		<!-- the schemas may be included several times, so it needs a combine attribute
-                                     (the attributes are inversed :-) at the transformation) -->
-		<rng:define name="{@name}">
-			<!-- work-around for empty issue -->
-			<xsl:choose>
-				<xsl:when test="not(*[local-name() != 'annotation'])">
-					<rng:empty/>
-					<xsl:apply-templates/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:apply-templates/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</rng:define>
-	</xsl:template>
-	<!-- when finds a ref attribute replace it by its type call (ref name="" or type) -->
-	<xsl:template match="xs:*[@ref]" mode="content">
-		<!-- when finds a attribute declaraction with a ref attribute replace it by
-		its type call prefixed by attr_ -->
-		<xsl:choose>
-			<xsl:when test="local-name() = 'attribute'">
-				<xsl:variable name="type">
-					<xsl:choose>
-						<!-- do not override attribute ref if it is a standard xml:* attribute -->
-						<xsl:when test="starts-with(@ref, 'xml:')">
-							<xsl:value-of select="@ref"/>
-						</xsl:when>
-						<!--<xsl:when test="contains(@ref, ':')">
-							<xsl:value-of select="concat('attr_', substring-after(@ref, ':'))"/>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="concat('attr_', @ref)"/>
-						</xsl:otherwise>-->
-						<xsl:otherwise>
-							<xsl:value-of select="@ref"/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:variable>
-				<xsl:call-template name="type">
-					<xsl:with-param name="type" select="$type"/>
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="type">
-					<xsl:with-param name="type" select="@ref"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	<!-- the <xs:simpleType> and <xs:complexType without name attribute are ignored -->
-	<xsl:template match="xs:sequence|xs:simpleContent|xs:complexContent|xs:simpleType|xs:complexType">
-		<!--LD-->
-		<xsl:if test="parent::xs:complexType[@mixed='true']">
-			<rng:text/>
-		</xsl:if>			
-		<xsl:apply-templates/>
-	</xsl:template>
-	<xsl:template match="xs:extension[@base]">
-		<xsl:call-template name="type">
-			<xsl:with-param name="type" select="@base"/>
-		</xsl:call-template>
-	</xsl:template>
-	<xsl:template match="xs:element[@name]">
-		<xsl:choose>
-			<!-- case of element defined at root of schema, must be surrounded by rng:define with a rng:start reference if is the root element -->
-			<xsl:when test="parent::xs:schema">
-				<!--<rng:start combine="choice">
-                    <!-\- must introduce prefix in order not to override a complextype of the same name -\->
-                    <rng:ref name="starting_{@name}"/>
-                </rng:start>
-                <rng:define name="starting_{@name}">
-                    <xsl:apply-templates select="current()" mode="content"/>
-                </rng:define>-->
-				<rng:define name="{@name}">
-					<xsl:apply-templates select="current()" mode="content"/>
-				</rng:define>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="occurrences"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	<xsl:template match="xs:restriction[@base]">
-		<xsl:choose>
-			<xsl:when test="xs:enumeration[@value]">
-				<rng:choice>
-					<xsl:apply-templates/>
-				</rng:choice>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="type">
-					<xsl:with-param name="type" select="@base"/>
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-	<xsl:template match="xs:enumeration[@value]">
-		<rng:value>
-			<xsl:value-of select="@value"/>
-		</rng:value>
-		<xsl:apply-templates/>
-	</xsl:template>
-	<!--
- support for fractionDigits, length, maxExclusive, maxInclusive, maxLength, minExclusive, minInclusive, minLength, pattern, totalDigits, whiteSpace
-    param is only allowed inside data element
-explicit removal of enumeration as not all the XSLT processor respect templates priority
- -->
-	<xsl:template match="xs:*[not(self::xs:enumeration)][@value]" mode="data">
-		<rng:param name="{local-name()}">
-			<xsl:value-of select="@value"/>
-		</rng:param>
-	</xsl:template>
-	<xsl:template match="node()" mode="data"/>
-	<xsl:template match="xs:all">
-		<rng:interleave>
-			<xsl:for-each select="child::text()[normalize-space(.) != ''] | child::*">
-				<xsl:apply-templates select="current()"/>
-			</xsl:for-each>
-		</rng:interleave>
-	</xsl:template>
-	<xsl:template match="xs:import|xs:include|xs:redefine">
+
+	<xsl:template match="xs:import | xs:include | xs:redefine">
 		<rng:include>
 			<xsl:if test="@schemaLocation">
 				<xsl:attribute name="href">
@@ -231,19 +81,167 @@ explicit removal of enumeration as not all the XSLT processor respect templates 
 			<xsl:apply-templates/>
 		</rng:include>
 	</xsl:template>
+
 	<xsl:template match="@default">
+		<a:documentation>default value is: <xsl:value-of select="."/></a:documentation>
+	</xsl:template>
+
+	<!-- unique and key are not supported in RelaxNG, must be done in schematron -->
+	<xsl:template match="xs:unique | xs:key"/>
+
+	<xsl:template match="xs:annotation">
 		<a:documentation>
-            default value is :
-			<xsl:value-of select="."/>
+			<xsl:apply-templates/>
 		</a:documentation>
 	</xsl:template>
+
+	<xsl:template match="xs:documentation">
+		<xsl:copy-of select="child::node()"/>
+	</xsl:template>
+
+	<xsl:template match="xs:appinfo">
+		<xsl:copy-of select="child::node()"/>
+	</xsl:template>
+
+	<xsl:template match="xs:union"> <!--no-->
+		<rng:choice>
+			<xsl:apply-templates select="@memberTypes"/>
+			<xsl:apply-templates/>
+		</rng:choice>
+	</xsl:template>
+
+	<xsl:template match="@memberTypes"> <!--no-->
+		<xsl:call-template name="declareMemberTypes">
+			<xsl:with-param name="memberTypes" select="."/>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:list"> <!--no-->
+		<rng:list>
+			<xsl:apply-templates select="@itemType"/>
+			<xsl:apply-templates/>
+		</rng:list>
+	</xsl:template>
+
+	<xsl:template match="@itemType"> <!--no-->
+		<xsl:call-template name="type">
+			<xsl:with-param name="type" select="."/>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:group[@name] | xs:attributeGroup[@name]">
+		<rng:define name="{@name}">
+			<xsl:apply-templates/>
+		</rng:define>
+	</xsl:template>
+
+	<xsl:template match="xs:complexType[@name]">
+		<rng:define name="{@name}">
+			<xsl:if test="@mixed eq 'true'  and (xs:element or xs:attribute)"> <!--LD--><xsl:message>=<xsl:value-of select="@name"/>=</xsl:message>
+				<rng:text/>
+			</xsl:if>		
+			<xsl:apply-templates/>
+		</rng:define>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name]">
+		<rng:define name="{@name}">
+			<rng:text/>  <!--LD-->		
+			<xsl:apply-templates/>
+		</rng:define>
+	</xsl:template>
+
+	<!-- when finds a ref attribute replace it by its type call (ref name="" or type) -->
+	<xsl:template match="xs:*[@ref]" mode="content">
+		<xsl:call-template name="type">
+			<xsl:with-param name="type" select="@ref"/>
+		</xsl:call-template>
+	</xsl:template>
+
+	<!-- the <xs:simpleType> and <xs:complexType without name attribute are ignored -->
+	<xsl:template match="xs:complexType | xs:simpleType | xs:complexContent">
+		<xsl:apply-templates/>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleContent">
+		<xsl:if test="parent::xs:complexType"> <!--LD-->
+			<rng:text/>
+		</xsl:if>
+		<xsl:apply-templates/>
+	</xsl:template>
+
+	<xsl:template match="xs:sequence">		
+		<xsl:if test="parent::xs:complexType[@mixed eq 'true'] and xs:element"> <!--LD-->
+			<rng:text/>
+		</xsl:if>
+		<xsl:apply-templates/>
+	</xsl:template>
+
+	<xsl:template match="xs:extension[@base]">
+		<xsl:call-template name="type">
+			<xsl:with-param name="type" select="@base"/>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name]">
+		<xsl:choose>
+			<!-- case of element defined at root of schema, must be surrounded by rng:define with a rng:start reference if is the root element -->
+			<xsl:when test="parent::xs:schema">
+				<rng:define name="{@name}">
+					<xsl:apply-templates select="current()" mode="content"/>
+				</rng:define>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="occurrences"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="xs:restriction[@base]">
+		<xsl:choose>
+			<xsl:when test="xs:enumeration[@value]">
+				<rng:choice>
+					<xsl:apply-templates/>
+				</rng:choice>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:call-template name="type">
+					<xsl:with-param name="type" select="@base"/>
+				</xsl:call-template>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="xs:enumeration[@value]">
+		<rng:value>
+			<xsl:value-of select="@value"/>
+		</rng:value>
+		<xsl:apply-templates/>
+	</xsl:template>
+
+	<!-- support for fractionDigits, length, maxExclusive, maxInclusive, maxLength, minExclusive, minInclusive, minLength, pattern, totalDigits, whiteSpace
+	param is only allowed inside data element explicit removal of enumeration as not all the XSLT processor respect templates priority -->
+	<xsl:template match="xs:*[not(self::xs:enumeration)][@value]" mode="data">
+		<rng:param name="{local-name()}">
+			<xsl:value-of select="@value"/>
+		</rng:param>
+	</xsl:template>
+
+	<xsl:template match="node()" mode="data"/>
+
+	<xsl:template match="xs:all">
+		<rng:interleave>
+			<xsl:for-each select="child::text()[normalize-space(.) != ''] | child::*">
+				<xsl:apply-templates select="current()"/>
+			</xsl:for-each>
+		</rng:interleave>
+	</xsl:template>
+	
+
 	<xsl:template match="xs:attribute">
 		<xsl:choose>
 			<!-- attributes specified at schema level -->
 			<xsl:when test="parent::xs:schema">
-				<!--<rng:define name="attr_{@name}">
-					<xsl:apply-templates select="current()" mode="occurrences"/>
-				</rng:define>-->
 				<rng:define name="{@name}">
 					<xsl:apply-templates select="current()" mode="content"/>
 				</rng:define>
@@ -252,7 +250,8 @@ explicit removal of enumeration as not all the XSLT processor respect templates 
 				<xsl:apply-templates select="current()" mode="occurrences"/>
 			</xsl:otherwise>
 		</xsl:choose>
-	</xsl:template>
+	</xsl:template> 
+
 	<xsl:template match="xs:attribute" mode="occurrences">
 		<xsl:choose>
 			<xsl:when test="@use and @use='prohibited'"/>
@@ -267,6 +266,7 @@ explicit removal of enumeration as not all the XSLT processor respect templates 
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+
 	<xsl:template match="xs:attribute[@name]" mode="content">
 		<rng:attribute name="{@name}">
 			<xsl:apply-templates select="@default" mode="attributeDefaultValue"/>
@@ -303,6 +303,9 @@ explicit removal of enumeration as not all the XSLT processor respect templates 
 	</xsl:template>
 	<xsl:template match="xs:choice" mode="content">
 		<rng:choice>
+			<xsl:if test="parent::xs:complexType[@mixed='true'] or //xs:group[@ref eq current()/parent::xs:group/@name]/parent::xs:complexType[@mixed='true']"> <!--LD-->
+				<rng:text/>
+			</xsl:if>
 			<xsl:apply-templates/>
 		</rng:choice>
 	</xsl:template>
@@ -373,24 +376,26 @@ explicit removal of enumeration as not all the XSLT processor respect templates 
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
+
 	<xsl:template name="type">
 		<xsl:param name="type"/>
 		<xsl:choose>
-			<xsl:when test="contains($type, 'anyType')">
+			<xsl:when test="contains($type, 'anyType')"> <!--no-->
 				<rng:data type="string">
 					<xsl:apply-templates mode="data"/>
 				</rng:data>
 				<xsl:apply-templates/>
 			</xsl:when>
-			<!-- have to improve the prefix detection -->
 			<xsl:when test="starts-with($type, 'xs:') or starts-with($type, 'xsd:')">
+				<xsl:if test="substring-after($type, ':') = ('string', 'decimal', 'integer', 'date', 'time', 'duration', 'boolean')">
+					<rng:text/>
+				</xsl:if>
 				<rng:data type="{substring-after($type, ':')}">
 					<xsl:apply-templates select="*" mode="data"/>
 				</rng:data>
-				<!-- xsltproc tries to apply templates on current attributes -->
 				<xsl:apply-templates select="*"/>
 			</xsl:when>
-			<xsl:when test="starts-with($type, 'xml:')">
+			<xsl:when test="starts-with($type, 'xml:')"> <!--no-->
 				<xsl:variable name="localName" select="substring-after($type, ':')"/>
 				<rng:attribute name="{$localName}" ns="http://www.w3.org/XML/1998/namespace">
 					<xsl:choose>
@@ -410,22 +415,13 @@ explicit removal of enumeration as not all the XSLT processor respect templates 
 				</rng:attribute>
 			</xsl:when>
 			<xsl:otherwise>
-				<!--<xsl:choose>
-					<xsl:when test="contains($type, ':')">
-						<rng:ref name="{substring-after($type, ':')}"/>
-						<xsl:apply-templates/>
-					</xsl:when>
-					<xsl:otherwise>
-						<rng:ref name="{$type}"/>
-						<xsl:apply-templates/>
-					</xsl:otherwise>
-				</xsl:choose>-->
 				<rng:ref name="{$type}"/>
 				<xsl:apply-templates/>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	<xsl:template name="declareMemberTypes">
+
+	<xsl:template name="declareMemberTypes"> <!--no-->
 		<xsl:param name="memberTypes"/>
 		<xsl:choose>
 			<xsl:when test="contains($memberTypes, ' ')">
@@ -443,6 +439,4 @@ explicit removal of enumeration as not all the XSLT processor respect templates 
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-	<!-- LD: to remove warning in XSLT 2.0 processor (template in no namespace) -->
-	<xsl:template match="abrakadabra"/>
 </xsl:stylesheet>
