@@ -20,9 +20,7 @@
 					<xsl:variable name="xsd" select="if (doc-available($xsd-url)) then document($xsd-url) else ()"/>
 					<xsl:choose>
 						<xsl:when test="$xsd">
-							<xsl:message>  Processing
-								<xsl:value-of select="$src"/>
-							</xsl:message>
+							<xsl:message>  Processing <xsl:value-of select="$src"/></xsl:message>
 							<xsl:variable name="rng-url" select="concat('schema/rng/', replace($src, '.xsd', '.rng'))"/>
 							<xsl:result-document href="{$rng-url}" method="xml" indent="yes" encoding="utf-8">
 								<xsl:apply-templates select="$xsd/xs:schema"/>
@@ -137,7 +135,7 @@
 
 	<xsl:template match="xs:complexType[@name]">
 		<rng:define name="{@name}">
-			<xsl:if test="@mixed eq 'true'  and (xs:element or xs:attribute)"> <!--LD--><xsl:message>=<xsl:value-of select="@name"/>=</xsl:message>
+			<xsl:if test="@mixed eq 'true'  and (xs:element or xs:attribute)"> <!--LD-->
 				<rng:text/>
 			</xsl:if>		
 			<xsl:apply-templates/>

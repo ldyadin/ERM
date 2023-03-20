@@ -20,7 +20,7 @@
 							
 <xsl:strip-space elements="sect1 sect2 informaltable tgroup tbody row link screen"/>
 							
-<xsl:param name="number-of-columns" select="5"/>
+<xsl:param name="number-of-columns" select="6"/>
 <xsl:param name="html_stylesheet" select="'doc.css'"/>
 <xsl:param name="element-tree_js" select="'element-tree.js'"/>
 <xsl:param name="index_file" select="'index.html'"/>
