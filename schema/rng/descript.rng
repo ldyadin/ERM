@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0"
              xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
              xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
              xmlns:xlink="http://www.w3.org/1999/xlink"
-             ns=""
              datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
     <rng:include href="xlink.rng" ns="http://www.w3.org/1999/xlink"/>
     <rng:include href="rdf.rng" ns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
@@ -40,7 +39,9 @@
             <rng:ref name="identAndStatusSection"/>
             <rng:ref name="content"/>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="identAndStatusSection">
       <rng:element name="identAndStatusSection">
@@ -89,18 +90,16 @@
         <rng:ref name="extensionCode"/>
     </rng:define>
     <rng:define name="extensionProducer">
-      <rng:optional>
-         <rng:attribute name="extensionProducer">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="extensionProducer">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="extensionCode">
-      <rng:optional>
-         <rng:attribute name="extensionCode">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="extensionCode">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="dmCode">
       <rng:element name="dmCode">
@@ -119,137 +118,140 @@
         <rng:ref name="infoCode"/>
         <rng:ref name="infoCodeVariant"/>
         <rng:ref name="itemLocationCode"/>
-        <rng:ref name="learnCode"/>
-        <rng:ref name="learnEventCode"/>
+        <rng:optional>
+         <rng:ref name="learnCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="learnEventCode"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="modelIdentCode">
-      <rng:optional>
-         <rng:attribute name="modelIdentCode">
-            <rng:ref name="modelIdentCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="modelIdentCode">
+         <rng:ref name="modelIdentCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="modelIdentCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{2,14}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="systemDiffCode">
-      <rng:optional>
-         <rng:attribute name="systemDiffCode">
-            <rng:ref name="systemDiffCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="systemDiffCode">
+         <rng:ref name="systemDiffCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="systemDiffCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{1,4}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="systemCode">
-      <rng:optional>
-         <rng:attribute name="systemCode">
-            <rng:ref name="systemCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="systemCode">
+         <rng:ref name="systemCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="systemCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{2,3}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="subSystemCode">
-      <rng:optional>
-         <rng:attribute name="subSystemCode">
-            <rng:ref name="subSystemCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="subSystemCode">
+         <rng:ref name="subSystemCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="subSystemCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{1}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="subSubSystemCode">
-      <rng:optional>
-         <rng:attribute name="subSubSystemCode">
-            <rng:ref name="subSubSystemCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="subSubSystemCode">
+         <rng:ref name="subSubSystemCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="subSubSystemCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{1}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="assyCode">
-      <rng:optional>
-         <rng:attribute name="assyCode">
-            <rng:ref name="assyCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="assyCode">
+         <rng:ref name="assyCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="assyCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">([A-Z0-9]{2}|[A-Z0-9]{4})</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="disassyCode">
-      <rng:optional>
-         <rng:attribute name="disassyCode">
-            <rng:ref name="disassyCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="disassyCode">
+         <rng:ref name="disassyCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="disassyCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{2}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="disassyCodeVariant">
-      <rng:optional>
-         <rng:attribute name="disassyCodeVariant">
-            <rng:ref name="disassyCodeVariantAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="disassyCodeVariant">
+         <rng:ref name="disassyCodeVariantAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="disassyCodeVariantAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{1,3}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="infoCode">
-      <rng:optional>
-         <rng:attribute name="infoCode">
-            <rng:ref name="infoCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="infoCode">
+         <rng:ref name="infoCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="infoCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{3}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="infoCodeVariant">
-      <rng:optional>
-         <rng:attribute name="infoCodeVariant">
-            <rng:ref name="infoCodeVariantAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="infoCodeVariant">
+         <rng:ref name="infoCodeVariantAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="infoCodeVariantAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{1}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="itemLocationCode">
-      <rng:optional>
-         <rng:attribute name="itemLocationCode">
-            <rng:ref name="itemLocationCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="itemLocationCode">
+         <rng:ref name="itemLocationCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="itemLocationCodeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>A</rng:value>
             <rng:value>B</rng:value>
@@ -259,25 +261,24 @@
         </rng:choice>
     </rng:define>
     <rng:define name="learnCode">
-      <rng:optional>
-         <rng:attribute name="learnCode">
-            <rng:ref name="learnCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="learnCode">
+         <rng:ref name="learnCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="learnCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">([T|H][A-Z0-9]{2})</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="learnEventCode">
-      <rng:optional>
-         <rng:attribute name="learnEventCode">
-            <rng:ref name="learnEventCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="learnEventCode">
+         <rng:ref name="learnEventCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="learnEventCodeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>A</rng:value>
             <rng:value>B</rng:value>
@@ -296,26 +297,26 @@
         <rng:ref name="countryIsoCode"/>
     </rng:define>
     <rng:define name="languageIsoCode">
-      <rng:optional>
-         <rng:attribute name="languageIsoCode">
-            <rng:ref name="languageIsoCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="languageIsoCode">
+         <rng:ref name="languageIsoCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="languageIsoCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[a-z]{2,3}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="countryIsoCode">
-      <rng:optional>
-         <rng:attribute name="countryIsoCode">
-            <rng:ref name="countryIsoCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="countryIsoCode">
+         <rng:ref name="countryIsoCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="countryIsoCodeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z]{2}</rng:param>
       </rng:data>
     </rng:define>
@@ -329,25 +330,23 @@
         <rng:ref name="inWork"/>
     </rng:define>
     <rng:define name="issueNumber">
-      <rng:optional>
-         <rng:attribute name="issueNumber">
-            <rng:ref name="issueNumberAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="issueNumber">
+         <rng:ref name="issueNumberAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="issueNumberAttType">
+      <rng:text/>
         <rng:data type="nonNegativeInteger">
          <rng:param name="pattern">\d{3}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="inWork">
-      <rng:optional>
-         <rng:attribute name="inWork">
-            <rng:ref name="inWorkAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="inWork">
+         <rng:ref name="inWorkAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="inWorkAttType">
+      <rng:text/>
         <rng:data type="nonNegativeInteger">
          <rng:param name="pattern">\d{2}</rng:param>
       </rng:data>
@@ -377,38 +376,35 @@
         <rng:ref name="day"/>
     </rng:define>
     <rng:define name="year">
-      <rng:optional>
-         <rng:attribute name="year">
-            <rng:ref name="yearAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="year">
+         <rng:ref name="yearAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="yearAttType">
+      <rng:text/>
         <rng:data type="gYear">
          <rng:param name="pattern">\d{4}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="month">
-      <rng:optional>
-         <rng:attribute name="month">
-            <rng:ref name="monthAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="month">
+         <rng:ref name="monthAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="monthAttType">
+      <rng:text/>
         <rng:data type="positiveInteger">
          <rng:param name="maxInclusive">12</rng:param>
          <rng:param name="pattern">\d{2}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="day">
-      <rng:optional>
-         <rng:attribute name="day">
-            <rng:ref name="dayAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="day">
+         <rng:ref name="dayAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="dayAttType">
+      <rng:text/>
         <rng:data type="positiveInteger">
          <rng:param name="maxInclusive">31</rng:param>
          <rng:param name="pattern">\d{2}</rng:param>
@@ -429,11 +425,13 @@
     </rng:define>
     <rng:define name="techName">
       <rng:element name="techName">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
     <rng:define name="infoName">
       <rng:element name="infoName">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -493,8 +491,12 @@
          <rng:ref name="remarks"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="id"/>
-        <rng:ref name="issueType"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="issueType"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="sourceDmIdent">
       <rng:element name="sourceDmIdent">
@@ -526,13 +528,12 @@
         <rng:ref name="commercialSecurityAttGroup"/>
     </rng:define>
     <rng:define name="securityClassification">
-      <rng:optional>
-         <rng:attribute name="securityClassification">
-            <rng:ref name="securityClassificationAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="securityClassification">
+         <rng:ref name="securityClassificationAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="securityClassificationAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>01</rng:value>
             <rng:value>02</rng:value>
@@ -636,17 +637,20 @@
         </rng:choice>
     </rng:define>
     <rng:define name="commercialSecurityAttGroup">
-        <rng:ref name="commercialClassification"/>
-        <rng:ref name="caveat"/>
+        <rng:optional>
+         <rng:ref name="commercialClassification"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="caveat"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="commercialClassification">
-      <rng:optional>
-         <rng:attribute name="commercialClassification">
-            <rng:ref name="commercialClassificationAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="commercialClassification">
+         <rng:ref name="commercialClassificationAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="commercialClassificationAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>cc01</rng:value>
             <rng:value>cc02</rng:value>
@@ -750,13 +754,12 @@
         </rng:choice>
     </rng:define>
     <rng:define name="caveat">
-      <rng:optional>
-         <rng:attribute name="caveat">
-            <rng:ref name="caveatAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="caveat">
+         <rng:ref name="caveatAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="caveatAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>cv01</rng:value>
             <rng:value>cv02</rng:value>
@@ -871,8 +874,12 @@
          <rng:ref name="restrictionInfo"/>
       </rng:optional>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -901,7 +908,9 @@
          <rng:ref name="supersedure"/>
       </rng:optional>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -911,30 +920,36 @@
       </rng:element>
    </rng:define>
     <rng:define name="dataDistributionElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="id">
-      <rng:optional>
-         <rng:attribute name="id">
-            <rng:data type="ID"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="id">
+         <rng:data type="ID"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="changeAttGroup">
-        <rng:ref name="changeType"/>
-        <rng:ref name="changeMark"/>
-        <rng:ref name="reasonForUpdateRefIds"/>
+        <rng:optional>
+         <rng:ref name="changeType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="changeMark"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="reasonForUpdateRefIds"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="changeType">
-      <rng:optional>
-         <rng:attribute name="changeType">
-            <rng:ref name="changeTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="changeType">
+         <rng:ref name="changeTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="changeTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>add</rng:value>
             <rng:value>delete</rng:value>
@@ -942,26 +957,25 @@
         </rng:choice>
     </rng:define>
     <rng:define name="changeMark">
-      <rng:optional>
-         <rng:attribute name="changeMark">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="changeMark">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="yesOrNoAttType">
+      <rng:text/>
         <rng:data type="int">
          <rng:param name="pattern">[01]</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="reasonForUpdateRefIds">
-      <rng:optional>
-         <rng:attribute name="reasonForUpdateRefIds">
-            <rng:data type="IDREFS"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="reasonForUpdateRefIds">
+         <rng:data type="IDREFS"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="securityAttGroup">
-        <rng:ref name="securityClassification"/>
+        <rng:optional>
+         <rng:ref name="securityClassification"/>
+      </rng:optional>
         <rng:ref name="commercialSecurityAttGroup"/>
     </rng:define>
     <rng:define name="exportControl">
@@ -978,11 +992,17 @@
          <rng:ref name="exportRegistrationCode"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
-        <rng:ref name="exportRegulationType"/>
-        <rng:ref name="governmentAuthority"/>
+        <rng:optional>
+         <rng:ref name="exportRegulationType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="governmentAuthority"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="exportRegistrationStmt">
       <rng:element name="exportRegistrationStmt">
@@ -996,7 +1016,9 @@
             <rng:ref name="dmRef"/>
         </rng:choice>
       </rng:oneOrMore>
-        <rng:ref name="exportRole"/>
+        <rng:optional>
+         <rng:ref name="exportRole"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="simplePara">
       <rng:element name="simplePara">
@@ -1004,47 +1026,55 @@
       </rng:element>
    </rng:define>
     <rng:define name="simpleParaElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:ref name="subOrSuperScriptElemGroup"/>
       </rng:zeroOrMore>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
     </rng:define>
     <rng:define name="subOrSuperScriptElemGroup">
         <rng:choice>
+         <rng:text/>
             <rng:ref name="subScript"/>
             <rng:ref name="superScript"/>
         </rng:choice>
     </rng:define>
     <rng:define name="subScript">
       <rng:element name="subScript">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
     <rng:define name="superScript">
       <rng:element name="superScript">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
     <rng:define name="authorityAttGroup">
-        <rng:ref name="authorityName"/>
-        <rng:ref name="authorityDocument"/>
+        <rng:optional>
+         <rng:ref name="authorityName"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="authorityDocument"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="authorityName">
-      <rng:optional>
-         <rng:attribute name="authorityName">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="authorityName">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="authorityDocument">
-      <rng:optional>
-         <rng:attribute name="authorityDocument">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="authorityDocument">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="dmRef">
       <rng:element name="dmRef">
@@ -1061,9 +1091,15 @@
          <rng:ref name="behavior"/>
       </rng:optional>
         
-        <rng:ref name="referredFragment"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="referredFragment"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -1109,17 +1145,20 @@
       </rng:element>
    </rng:define>
     <rng:define name="behaviorElemType">
-        <rng:ref name="linkShow"/>
-        <rng:ref name="linkActuate"/>
+        <rng:optional>
+         <rng:ref name="linkShow"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="linkActuate"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="linkShow">
-      <rng:optional>
-         <rng:attribute name="linkShow">
-            <rng:ref name="linkShowAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="linkShow">
+         <rng:ref name="linkShowAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="linkShowAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>newPane</rng:value>
             <rng:value>embedInContext</rng:value>
@@ -1128,40 +1167,35 @@
         </rng:choice>
     </rng:define>
     <rng:define name="linkActuate">
-      <rng:optional>
-         <rng:attribute name="linkActuate">
-            <rng:ref name="linkActuateAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="linkActuate">
+         <rng:ref name="linkActuateAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="linkActuateAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>onLoad</rng:value>
             <rng:value>onRequest</rng:value>
         </rng:choice>
     </rng:define>
     <rng:define name="referredFragment">
-      <rng:optional>
-         <rng:attribute name="referredFragment">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="referredFragment">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="applicRefId">
-      <rng:optional>
-         <rng:attribute name="applicRefId">
-            <rng:data type="IDREF"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicRefId">
+         <rng:data type="IDREF"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="exportRole">
-      <rng:optional>
-         <rng:attribute name="exportRole">
-            <rng:ref name="exportRoleAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="exportRole">
+         <rng:ref name="exportRoleAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="exportRoleAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>partial</rng:value>
             <rng:value>full</rng:value>
@@ -1173,28 +1207,28 @@
       </rng:element>
    </rng:define>
     <rng:define name="exportRegistrationCodeElemType">
-        <rng:ref name="exportRegulationCodeType"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="exportRegulationCodeType"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="exportRegulationCodeType">
-      <rng:optional>
-         <rng:attribute name="exportRegulationCodeType">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="exportRegulationCodeType">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="exportRegulationType">
-      <rng:optional>
-         <rng:attribute name="exportRegulationType">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="exportRegulationType">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="governmentAuthority">
-      <rng:optional>
-         <rng:attribute name="governmentAuthority">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="governmentAuthority">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="dataHandling">
       <rng:element name="dataHandling">
@@ -1202,7 +1236,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="dataHandlingElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -1212,7 +1249,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="dataDestructionElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -1222,7 +1262,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="dataDisclosureElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -1232,10 +1275,13 @@
       </rng:element>
    </rng:define>
     <rng:define name="supersedureElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:ref name="subOrSuperScriptElemGroup"/>
       </rng:zeroOrMore>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -1256,7 +1302,9 @@
          <rng:ref name="dataConds"/>
       </rng:optional>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -1271,7 +1319,9 @@
          <rng:ref name="copyrightPara"/>
       </rng:oneOrMore>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -1281,8 +1331,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="copyrightParaElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="emphasis"/>
             <rng:ref name="subScript"/>
             <rng:ref name="superScript"/>
@@ -1290,8 +1342,12 @@
             <rng:ref name="randomList"/>
         </rng:choice>
       </rng:zeroOrMore>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
     </rng:define>
     <rng:define name="emphasis">
@@ -1300,15 +1356,19 @@
       </rng:element>
    </rng:define>
     <rng:define name="emphasisElemType">
+      <rng:text/>
         
             <rng:optional>
          <rng:ref name="textElemGroup"/>
       </rng:optional>
         
-        <rng:ref name="emphasisType"/>
+        <rng:optional>
+         <rng:ref name="emphasisType"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="textElemGroup">
         <rng:choice>
+         <rng:text/>
             <rng:ref name="functionalItemRef"/>
             <rng:ref name="circuitBreakerRef"/>
             <rng:ref name="controlIndicatorRef"/>
@@ -1354,10 +1414,18 @@
       </rng:optional>
         
         <rng:ref name="functionalItemNumber"/>
-        <rng:ref name="functionalItemType"/>
-        <rng:ref name="id"/>
-        <rng:ref name="installationIdent"/>
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="functionalItemType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="installationIdent"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -1373,6 +1441,7 @@
     </rng:define>
     <rng:define name="shortName">
       <rng:element name="shortName">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -1407,8 +1476,12 @@
          </rng:optional>
             
         </rng:choice>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -1445,37 +1518,36 @@
         <rng:ref name="pmVolume"/>
     </rng:define>
     <rng:define name="pmIssuer">
-      <rng:optional>
-         <rng:attribute name="pmIssuer">
-            <rng:ref name="pmIssuerAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="pmIssuer">
+         <rng:ref name="pmIssuerAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="pmIssuerAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{5}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="pmNumber">
-      <rng:optional>
-         <rng:attribute name="pmNumber">
-            <rng:ref name="pmNumberAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="pmNumber">
+         <rng:ref name="pmNumberAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="pmNumberAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[A-Z0-9]{5}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="pmVolume">
-      <rng:optional>
-         <rng:attribute name="pmVolume">
-            <rng:ref name="pmVolumeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="pmVolume">
+         <rng:ref name="pmVolumeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="pmVolumeAttType">
+      <rng:text/>
         <rng:data type="nonNegativeInteger">
          <rng:param name="pattern">\d{2}</rng:param>
       </rng:data>
@@ -1510,6 +1582,7 @@
     </rng:define>
     <rng:define name="pmTitle">
       <rng:element name="pmTitle">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -1524,20 +1597,24 @@
          <rng:ref name="enterpriseName"/>
       </rng:optional>
         
-        <rng:ref name="enterpriseCode"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="enterpriseCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="enterpriseName">
       <rng:element name="enterpriseName">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
     <rng:define name="enterpriseCode">
-      <rng:optional>
-         <rng:attribute name="enterpriseCode">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="enterpriseCode">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="pubMedia">
       <rng:element name="pubMedia">
@@ -1547,39 +1624,40 @@
     <rng:define name="pubMediaElemType">
         <rng:ref name="pubMediaType"/>
         <rng:ref name="pubMediaCode"/>
-        <rng:ref name="volumeNumber"/>
-        <rng:ref name="mediaLocation"/>
+        <rng:optional>
+         <rng:ref name="volumeNumber"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="mediaLocation"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="pubMediaType">
-      <rng:optional>
-         <rng:attribute name="pubMediaType">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="pubMediaType">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="pubMediaCode">
-      <rng:optional>
-         <rng:attribute name="pubMediaCode">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="pubMediaCode">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="volumeNumber">
-      <rng:optional>
-         <rng:attribute name="volumeNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="volumeNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="mediaLocation">
-      <rng:optional>
-         <rng:attribute name="mediaLocation">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="mediaLocation">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="shortPmTitle">
       <rng:element name="shortPmTitle">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -1598,8 +1676,12 @@
          <rng:ref name="behavior"/>
       </rng:optional>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -1629,8 +1711,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="externalPubCodeElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="indexFlag"/>
             <rng:ref name="subScript"/>
             <rng:ref name="superScript"/>
@@ -1639,7 +1723,9 @@
             <rng:ref name="verbatimText"/>
         </rng:choice>
       </rng:zeroOrMore>
-        <rng:ref name="pubCodingScheme"/>
+        <rng:optional>
+         <rng:ref name="pubCodingScheme"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="indexFlag">
       <rng:element name="indexFlag">
@@ -1647,38 +1733,42 @@
       </rng:element>
    </rng:define>
     <rng:define name="indexFlagElemType">
-        <rng:ref name="indexLevelOne"/>
-        <rng:ref name="indexLevelTwo"/>
-        <rng:ref name="indexLevelThree"/>
-        <rng:ref name="indexLevelFour"/>
+        <rng:optional>
+         <rng:ref name="indexLevelOne"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="indexLevelTwo"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="indexLevelThree"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="indexLevelFour"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="indexLevelOne">
-      <rng:optional>
-         <rng:attribute name="indexLevelOne">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="indexLevelOne">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="indexLevelTwo">
-      <rng:optional>
-         <rng:attribute name="indexLevelTwo">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="indexLevelTwo">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="indexLevelThree">
-      <rng:optional>
-         <rng:attribute name="indexLevelThree">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="indexLevelThree">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="indexLevelFour">
-      <rng:optional>
-         <rng:attribute name="indexLevelFour">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="indexLevelFour">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="acronym">
       <rng:element name="acronym">
@@ -1690,8 +1780,12 @@
             <rng:ref name="acronymTerm"/>
             <rng:ref name="acronymDefinition"/>
         
-        <rng:ref name="acronymType"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="acronymType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -1702,17 +1796,18 @@
       </rng:element>
    </rng:define>
     <rng:define name="acronymTermElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:ref name="subOrSuperScriptElemGroup"/>
       </rng:zeroOrMore>
-        <rng:ref name="internalRefId"/>
+        <rng:optional>
+         <rng:ref name="internalRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="internalRefId">
-      <rng:optional>
-         <rng:attribute name="internalRefId">
-            <rng:data type="IDREF"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="internalRefId">
+         <rng:data type="IDREF"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="acronymDefinition">
       <rng:element name="acronymDefinition">
@@ -1720,22 +1815,24 @@
       </rng:element>
    </rng:define>
     <rng:define name="acronymDefinitionElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:ref name="subOrSuperScriptElemGroup"/>
       </rng:zeroOrMore>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
     </rng:define>
     <rng:define name="acronymType">
-      <rng:optional>
-         <rng:attribute name="acronymType" a:defaultValue="at01">
-            <rng:ref name="acronymTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="acronymType" a:defaultValue="at01">
+         <rng:ref name="acronymTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="acronymTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>at01</rng:value>
             <rng:value>at02</rng:value>
@@ -1844,19 +1941,23 @@
       </rng:element>
    </rng:define>
     <rng:define name="verbatimTextElemType">
-        <rng:ref name="verbatimStyle"/>
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="verbatimStyle"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="verbatimStyle">
-      <rng:optional>
-         <rng:attribute name="verbatimStyle">
-            <rng:ref name="verbatimStyleAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="verbatimStyle">
+         <rng:ref name="verbatimStyleAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="verbatimStyleAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>vs01</rng:value>
             <rng:value>vs02</rng:value>
@@ -1960,11 +2061,10 @@
         </rng:choice>
     </rng:define>
     <rng:define name="pubCodingScheme">
-      <rng:optional>
-         <rng:attribute name="pubCodingScheme">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="pubCodingScheme">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="externalPubTitle">
       <rng:element name="externalPubTitle">
@@ -1974,6 +2074,7 @@
     <rng:define name="externalPubTitleElemType">
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="indexFlag"/>
             <rng:ref name="subScript"/>
             <rng:ref name="superScript"/>
@@ -1989,7 +2090,7 @@
       </rng:element>
    </rng:define>
     <rng:define name="externalPubIssueInfoElemType">
-        
+        <rng:text/>
             <rng:ref name="externalPubIssue"/>
         
     </rng:define>
@@ -2001,6 +2102,7 @@
     <rng:define name="externalPubIssueElemType">
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="indexFlag"/>
             <rng:ref name="subScript"/>
             <rng:ref name="superScript"/>
@@ -2043,9 +2145,15 @@
         <rng:ref name="externalPubIssueDateAttGroup"/>
     </rng:define>
     <rng:define name="externalPubIssueDateAttGroup">
-        <rng:ref name="year"/>
-        <rng:ref name="month"/>
-        <rng:ref name="day"/>
+        <rng:optional>
+         <rng:ref name="year"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="month"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="day"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="shortExternalPubTitle">
       <rng:element name="shortExternalPubTitle">
@@ -2055,6 +2163,7 @@
     <rng:define name="shortExternalPubTitleElemType">
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="indexFlag"/>
             <rng:ref name="subScript"/>
             <rng:ref name="superScript"/>
@@ -2065,20 +2174,18 @@
       </rng:zeroOrMore>
     </rng:define>
     <rng:define name="functionalItemNumber">
-      <rng:optional>
-         <rng:attribute name="functionalItemNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="functionalItemNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="functionalItemType">
-      <rng:optional>
-         <rng:attribute name="functionalItemType">
-            <rng:ref name="functionalItemTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="functionalItemType">
+         <rng:ref name="functionalItemTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="functionalItemTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>fit01</rng:value>
             <rng:value>fit02</rng:value>
@@ -2182,39 +2289,41 @@
         </rng:choice>
     </rng:define>
     <rng:define name="installationIdent">
-      <rng:optional>
-         <rng:attribute name="installationIdent">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="installationIdent">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="vendorInfoAttGroup">
-        <rng:ref name="contextIdent"/>
-        <rng:ref name="manufacturerCodeValue"/>
-        <rng:ref name="itemOriginator"/>
+        <rng:optional>
+         <rng:ref name="contextIdent"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="manufacturerCodeValue"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="itemOriginator"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="contextIdent">
-      <rng:optional>
-         <rng:attribute name="contextIdent">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="contextIdent">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="manufacturerCodeValue">
-      <rng:optional>
-         <rng:attribute name="manufacturerCodeValue">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="manufacturerCodeValue">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="itemOriginator">
-      <rng:optional>
-         <rng:attribute name="itemOriginator">
-            <rng:ref name="itemOriginatorAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="itemOriginator">
+         <rng:ref name="itemOriginatorAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="itemOriginatorAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>orig01</rng:value>
             <rng:value>orig02</rng:value>
@@ -2335,31 +2444,39 @@
       </rng:optional>
         
         <rng:ref name="circuitBreakerNumber"/>
-        <rng:ref name="circuitBreakerType"/>
-        <rng:ref name="circuitBreakerAction"/>
-        <rng:ref name="checkSum"/>
-        <rng:ref name="id"/>
-        <rng:ref name="installationIdent"/>
+        <rng:optional>
+         <rng:ref name="circuitBreakerType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="circuitBreakerAction"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="checkSum"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="installationIdent"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="vendorInfoAttGroup"/>
     </rng:define>
     <rng:define name="circuitBreakerNumber">
-      <rng:optional>
-         <rng:attribute name="circuitBreakerNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="circuitBreakerNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="circuitBreakerType">
-      <rng:optional>
-         <rng:attribute name="circuitBreakerType">
-            <rng:ref name="circuitBreakerTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="circuitBreakerType">
+         <rng:ref name="circuitBreakerTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="circuitBreakerTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>cbt01</rng:value>
             <rng:value>cbt02</rng:value>
@@ -2463,13 +2580,12 @@
         </rng:choice>
     </rng:define>
     <rng:define name="circuitBreakerAction">
-      <rng:optional>
-         <rng:attribute name="circuitBreakerAction">
-            <rng:ref name="circuitBreakerActionAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="circuitBreakerAction">
+         <rng:ref name="circuitBreakerActionAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="circuitBreakerActionAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>open</rng:value>
             <rng:value>close</rng:value>
@@ -2480,11 +2596,10 @@
         </rng:choice>
     </rng:define>
     <rng:define name="checkSum">
-      <rng:optional>
-         <rng:attribute name="checkSum">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="checkSum">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="controlIndicatorRef">
       <rng:element name="controlIndicatorRef">
@@ -2503,17 +2618,20 @@
          <rng:ref name="refs"/>
       </rng:optional>
         
-        <rng:ref name="controlIndicatorNumber"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="controlIndicatorNumber"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="controlIndicatorNumber">
-      <rng:optional>
-         <rng:attribute name="controlIndicatorNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="controlIndicatorNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="inlineSignificantData">
       <rng:element name="inlineSignificantData">
@@ -2521,16 +2639,16 @@
       </rng:element>
    </rng:define>
     <rng:define name="inlineSignificantDataElemType">
+      <rng:text/>
         <rng:ref name="significantParaDataType"/>
     </rng:define>
     <rng:define name="significantParaDataType">
-      <rng:optional>
-         <rng:attribute name="significantParaDataType">
-            <rng:ref name="significantParaDataTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="significantParaDataType">
+         <rng:ref name="significantParaDataTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="significantParaDataTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>psd01</rng:value>
             <rng:value>psd02</rng:value>
@@ -2639,13 +2757,18 @@
       </rng:element>
    </rng:define>
     <rng:define name="quantityElemType">
-        
+      <rng:text/>
+        <rng:text/>
             <rng:zeroOrMore>
          <rng:ref name="quantityGroup"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="quantityType"/>
-        <rng:ref name="quantityTypeSpecifics"/>
+        <rng:optional>
+         <rng:ref name="quantityType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="quantityTypeSpecifics"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="quantityGroup">
       <rng:element name="quantityGroup">
@@ -2666,8 +2789,12 @@
                 <rng:ref name="quantityTolerance"/>
             
         </rng:choice>
-        <rng:ref name="quantityGroupType"/>
-        <rng:ref name="quantityUnitOfMeasure"/>
+        <rng:optional>
+         <rng:ref name="quantityGroupType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="quantityUnitOfMeasure"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="quantityValue">
       <rng:element name="quantityValue">
@@ -2675,19 +2802,21 @@
       </rng:element>
    </rng:define>
     <rng:define name="quantityValueElemType">
-        
-            <rng:data type="decimal"/>
-      <rng:ref name="quantityUnitOfMeasure"/>
+        <rng:text/>
+            <rng:text/>
+      <rng:data type="decimal"/>
+      <rng:optional>
+         <rng:ref name="quantityUnitOfMeasure"/>
+      </rng:optional>
         
     </rng:define>
     <rng:define name="quantityUnitOfMeasure">
-      <rng:optional>
-         <rng:attribute name="quantityUnitOfMeasure">
-            <rng:ref name="quantityUnitOfMeasureAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="quantityUnitOfMeasure">
+         <rng:ref name="quantityUnitOfMeasureAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="quantityUnitOfMeasureAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>1/H</rng:value>
             <rng:value>1/K</rng:value>
@@ -4068,20 +4197,24 @@
       </rng:element>
    </rng:define>
     <rng:define name="quantityToleranceElemType">
-        
-            <rng:data type="decimal"/>
-      <rng:ref name="quantityToleranceType"/>
-      <rng:ref name="quantityUnitOfMeasure"/>
+        <rng:text/>
+            <rng:text/>
+      <rng:data type="decimal"/>
+      <rng:optional>
+         <rng:ref name="quantityToleranceType"/>
+      </rng:optional>
+      <rng:optional>
+         <rng:ref name="quantityUnitOfMeasure"/>
+      </rng:optional>
         
     </rng:define>
     <rng:define name="quantityToleranceType">
-      <rng:optional>
-         <rng:attribute name="quantityToleranceType" a:defaultValue="plusorminus">
-            <rng:ref name="quantityToleranceTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="quantityToleranceType" a:defaultValue="plusorminus">
+         <rng:ref name="quantityToleranceTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="quantityToleranceTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>plus</rng:value>
             <rng:value>minus</rng:value>
@@ -4089,13 +4222,12 @@
         </rng:choice>
     </rng:define>
     <rng:define name="quantityGroupType">
-      <rng:optional>
-         <rng:attribute name="quantityGroupType" a:defaultValue="nominal">
-            <rng:ref name="quantityGroupTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="quantityGroupType" a:defaultValue="nominal">
+         <rng:ref name="quantityGroupTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="quantityGroupTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>nominal</rng:value>
             <rng:value>minimum</rng:value>
@@ -4103,13 +4235,12 @@
         </rng:choice>
     </rng:define>
     <rng:define name="quantityType">
-      <rng:optional>
-         <rng:attribute name="quantityType">
-            <rng:ref name="quantityTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="quantityType">
+         <rng:ref name="quantityTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="quantityTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>qty01</rng:value>
             <rng:value>qty02</rng:value>
@@ -4213,11 +4344,10 @@
         </rng:choice>
     </rng:define>
     <rng:define name="quantityTypeSpecifics">
-      <rng:optional>
-         <rng:attribute name="quantityTypeSpecifics">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="quantityTypeSpecifics">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="zoneRef">
       <rng:element name="zoneRef">
@@ -4236,27 +4366,32 @@
          <rng:ref name="refs"/>
       </rng:optional>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="zoneNumber"/>
-        <rng:ref name="id"/>
-        <rng:ref name="lsarData"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="zoneNumber"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="lsarData"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
     </rng:define>
     <rng:define name="zoneNumber">
-      <rng:optional>
-         <rng:attribute name="zoneNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="zoneNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="lsarData">
-      <rng:optional>
-         <rng:attribute name="lsarData" a:defaultValue="0">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="lsarData" a:defaultValue="0">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="accessPointRef">
       <rng:element name="accessPointRef">
@@ -4272,30 +4407,38 @@
          <rng:ref name="refs"/>
       </rng:optional>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="accessPointNumber"/>
-        <rng:ref name="accessPointTypeValue"/>
-        <rng:ref name="id"/>
-        <rng:ref name="lsarData"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="accessPointNumber"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="accessPointTypeValue"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="lsarData"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
     </rng:define>
     <rng:define name="accessPointNumber">
-      <rng:optional>
-         <rng:attribute name="accessPointNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="accessPointNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="accessPointTypeValue">
-      <rng:optional>
-         <rng:attribute name="accessPointTypeValue">
-            <rng:ref name="accessPointTypeValueAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="accessPointTypeValue">
+         <rng:ref name="accessPointTypeValueAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="accessPointTypeValueAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>accpnl01</rng:value>
             <rng:value>accpnl02</rng:value>
@@ -4421,7 +4564,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="manufacturerCodeElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -4444,7 +4590,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="partNumberElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -4458,24 +4607,22 @@
         <rng:ref name="serialNumberValue"/>
     </rng:define>
     <rng:define name="serialNumberForm">
-      <rng:optional>
-         <rng:attribute name="serialNumberForm">
-            <rng:ref name="serialNumberFormAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="serialNumberForm">
+         <rng:ref name="serialNumberFormAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="serialNumberFormAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>single</rng:value>
             <rng:value>range</rng:value>
         </rng:choice>
     </rng:define>
     <rng:define name="serialNumberValue">
-      <rng:optional>
-         <rng:attribute name="serialNumberValue">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="serialNumberValue">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="internalRef">
       <rng:element name="internalRef">
@@ -4483,27 +4630,37 @@
       </rng:element>
    </rng:define>
     <rng:define name="internalRefElemType">
+      <rng:text/>
         
             <rng:zeroOrMore>
          <rng:ref name="subOrSuperScriptElemGroup"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="internalRefId"/>
-        <rng:ref name="internalRefTargetType"/>
-        <rng:ref name="referredFragment"/>
-        <rng:ref name="targetTitle"/>
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="internalRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="internalRefTargetType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="referredFragment"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="targetTitle"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="xlink:XLINKATT3"/>
     </rng:define>
     <rng:define name="internalRefTargetType">
-      <rng:optional>
-         <rng:attribute name="internalRefTargetType">
-            <rng:ref name="internalRefTargetTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="internalRefTargetType">
+         <rng:ref name="internalRefTargetTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="internalRefTargetTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>irtt01</rng:value>
             <rng:value>irtt02</rng:value>
@@ -4607,11 +4764,10 @@
         </rng:choice>
     </rng:define>
     <rng:define name="targetTitle">
-      <rng:optional>
-         <rng:attribute name="targetTitle">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="targetTitle">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="changeInline">
       <rng:element name="changeInline">
@@ -4619,12 +4775,15 @@
       </rng:element>
    </rng:define>
     <rng:define name="changeInlineElemType">
+      <rng:text/>
         
             <rng:optional>
          <rng:ref name="textElemGroup"/>
       </rng:optional>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -4635,46 +4794,50 @@
    </rng:define>
     <rng:define name="symbolElemType">
         <rng:ref name="infoEntityIdent"/>
-        <rng:ref name="id"/>
-        <rng:ref name="reproductionWidth"/>
-        <rng:ref name="reproductionHeight"/>
-        <rng:ref name="reproductionScale"/>
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="reproductionWidth"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="reproductionHeight"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="reproductionScale"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="xlink:XLINKATT1"/>
     </rng:define>
     <rng:define name="infoEntityIdent">
-      <rng:optional>
-         <rng:attribute name="infoEntityIdent">
-            <rng:data type="ENTITY"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="infoEntityIdent">
+         <rng:data type="ENTITY"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="reproductionWidth">
-      <rng:optional>
-         <rng:attribute name="reproductionWidth">
-            <rng:ref name="reproductionSizeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="reproductionWidth">
+         <rng:ref name="reproductionSizeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="reproductionSizeAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">\d+(\.\d+)?\s*(cm|in|mm|pc|pt)</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="reproductionHeight">
-      <rng:optional>
-         <rng:attribute name="reproductionHeight">
-            <rng:ref name="reproductionSizeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="reproductionHeight">
+         <rng:ref name="reproductionSizeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="reproductionScale">
-      <rng:optional>
-         <rng:attribute name="reproductionScale">
-            <rng:data type="positiveInteger"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="reproductionScale">
+         <rng:data type="positiveInteger"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="footnote">
       <rng:element name="footnote">
@@ -4687,9 +4850,15 @@
          <rng:ref name="para"/>
       </rng:oneOrMore>
         
-        <rng:ref name="footnoteMark"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="footnoteMark"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -4699,13 +4868,18 @@
       </rng:element>
    </rng:define>
     <rng:define name="paraElemType">
+      <rng:text/>
         
             <rng:zeroOrMore>
          <rng:ref name="paraContentElemGroup"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -4737,8 +4911,12 @@
          <rng:ref name="listItem"/>
       </rng:oneOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -4767,8 +4945,12 @@
             <rng:ref name="para"/>
         </rng:choice>
       </rng:oneOrMore>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -4790,10 +4972,18 @@
             </rng:choice>
       </rng:oneOrMore>
         
-        <rng:ref name="noteType"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="internalRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="noteType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="internalRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -4804,15 +4994,21 @@
       </rng:element>
    </rng:define>
     <rng:define name="noteParaElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="attentionText"/>
             <rng:ref name="attentionSequentialList"/>
             <rng:ref name="attentionRandomList"/>
         </rng:choice>
       </rng:zeroOrMore>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -4853,17 +5049,33 @@
          <rng:ref name="captionLine"/>
       </rng:oneOrMore>
         
-        <rng:ref name="color"/>
-        <rng:ref name="captionWidth"/>
-        <rng:ref name="captionHeight"/>
-        <rng:ref name="systemIdentCode"/>
-        <a:documentation>
-            default value is : left</a:documentation>
-      <rng:ref name="alignCaption"/>
-        <rng:ref name="tableOfContentType"/>
-        <rng:ref name="captionType"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="color"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="captionWidth"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="captionHeight"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="systemIdentCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="alignCaption"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="tableOfContentType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="captionType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -4873,20 +5085,19 @@
       </rng:element>
    </rng:define>
     <rng:define name="captionLineElemType">
-        
+        <rng:text/>
             <rng:zeroOrMore>
          <rng:ref name="acronymTerm"/>
       </rng:zeroOrMore>
         
     </rng:define>
     <rng:define name="color">
-      <rng:optional>
-         <rng:attribute name="color" a:defaultValue="co09">
-            <rng:ref name="colorAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="color" a:defaultValue="co09">
+         <rng:ref name="colorAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="colorAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>co00</rng:value>
             <rng:value>co01</rng:value>
@@ -4991,34 +5202,30 @@
         </rng:choice>
     </rng:define>
     <rng:define name="captionWidth">
-      <rng:optional>
-         <rng:attribute name="captionWidth">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="captionWidth">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="captionHeight">
-      <rng:optional>
-         <rng:attribute name="captionHeight">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="captionHeight">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="systemIdentCode">
-      <rng:optional>
-         <rng:attribute name="systemIdentCode">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="systemIdentCode">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="alignCaption">
-      <rng:optional>
-         <rng:attribute name="alignCaption">
-            <rng:ref name="alignCaptionAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="alignCaption">
+         <rng:ref name="alignCaptionAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="alignCaptionAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>left</rng:value>
             <rng:value>right</rng:value>
@@ -5026,13 +5233,12 @@
         </rng:choice>
     </rng:define>
     <rng:define name="tableOfContentType">
-      <rng:optional>
-         <rng:attribute name="tableOfContentType" a:defaultValue="none">
-            <rng:ref name="tableOfContentTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="tableOfContentType" a:defaultValue="none">
+         <rng:ref name="tableOfContentTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="tableOfContentTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>none</rng:value>
             <rng:value>redtoc</rng:value>
@@ -5043,13 +5249,12 @@
         </rng:choice>
     </rng:define>
     <rng:define name="captionType">
-      <rng:optional>
-         <rng:attribute name="captionType" a:defaultValue="primary">
-            <rng:ref name="captionTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="captionType" a:defaultValue="primary">
+         <rng:ref name="captionTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="captionTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>primary</rng:value>
             <rng:value>secondary</rng:value>
@@ -5069,8 +5274,12 @@
          <rng:ref name="attentionSequentialListItem"/>
       </rng:oneOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -5091,8 +5300,12 @@
             </rng:optional>
         </rng:choice>
       </rng:oneOrMore>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -5102,13 +5315,18 @@
       </rng:element>
    </rng:define>
     <rng:define name="attentionListItemParaElemType">
+      <rng:text/>
         
             <rng:zeroOrMore>
          <rng:ref name="attentionText"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -5124,9 +5342,15 @@
          <rng:ref name="attentionRandomListItem"/>
       </rng:oneOrMore>
         
-        <rng:ref name="listItemPrefix"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="listItemPrefix"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -5140,19 +5364,22 @@
         
             <rng:ref name="attentionListItemPara"/>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="listItemPrefix">
-      <rng:optional>
-         <rng:attribute name="listItemPrefix" a:defaultValue="pf02">
-            <rng:ref name="listItemPrefixAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="listItemPrefix" a:defaultValue="pf02">
+         <rng:ref name="listItemPrefixAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="listItemPrefixAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>pf01</rng:value>
             <rng:value>pf02</rng:value>
@@ -5256,11 +5483,10 @@
         </rng:choice>
     </rng:define>
     <rng:define name="noteType">
-      <rng:optional>
-         <rng:attribute name="noteType">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="noteType">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="randomList">
       <rng:element name="randomList">
@@ -5276,9 +5502,15 @@
          <rng:ref name="listItem"/>
       </rng:oneOrMore>
         
-        <rng:ref name="listItemPrefix"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="listItemPrefix"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -5300,8 +5532,12 @@
          <rng:ref name="definitionListItem"/>
       </rng:oneOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -5336,8 +5572,12 @@
             <rng:ref name="listItemTerm"/>
             <rng:ref name="listItemDefinition"/>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -5348,13 +5588,18 @@
       </rng:element>
    </rng:define>
     <rng:define name="listItemTermElemType">
+      <rng:text/>
         
             <rng:zeroOrMore>
          <rng:ref name="textElemGroup"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -5370,19 +5615,22 @@
          <rng:ref name="para"/>
       </rng:oneOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="footnoteMark">
-      <rng:optional>
-         <rng:attribute name="footnoteMark" a:defaultValue="num">
-            <rng:ref name="footnoteMarkAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="footnoteMark" a:defaultValue="num">
+         <rng:ref name="footnoteMarkAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="footnoteMarkAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>num</rng:value>
             <rng:value>sym</rng:value>
@@ -5395,7 +5643,9 @@
       </rng:element>
    </rng:define>
     <rng:define name="footnoteRefElemType">
-        <rng:ref name="internalRefId"/>
+        <rng:optional>
+         <rng:ref name="internalRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="captionGroup">
       <rng:element name="captionGroup">
@@ -5413,14 +5663,24 @@
             <rng:ref name="captionBody"/>
         
         <rng:ref name="cols"/>
-        <a:documentation>
-            default value is : left</a:documentation>
-      <rng:ref name="alignCaption"/>
-        <rng:ref name="tableOfContentType"/>
-        <rng:ref name="colsep"/>
-        <rng:ref name="rowsep"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="alignCaption"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="tableOfContentType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -5430,37 +5690,48 @@
       </rng:element>
    </rng:define>
     <rng:define name="colspecElemType">
-        <rng:ref name="colnum"/>
-        <rng:ref name="colname"/>
-        <rng:ref name="align"/>
-        <rng:ref name="charoff"/>
-        <rng:ref name="char"/>
-        <rng:ref name="colwidth"/>
-        <rng:ref name="colsep"/>
-        <rng:ref name="rowsep"/>
+        <rng:optional>
+         <rng:ref name="colnum"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colname"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="align"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="charoff"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="char"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colwidth"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="colnum">
-      <rng:optional>
-         <rng:attribute name="colnum">
-            <rng:data type="positiveInteger"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="colnum">
+         <rng:data type="positiveInteger"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="colname">
-      <rng:optional>
-         <rng:attribute name="colname">
-            <rng:data type="NMTOKEN"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="colname">
+         <rng:data type="NMTOKEN"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="align">
-      <rng:optional>
-         <rng:attribute name="align">
-            <rng:ref name="alignAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="align">
+         <rng:ref name="alignAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="alignAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>left</rng:value>
             <rng:value>right</rng:value>
@@ -5470,44 +5741,38 @@
         </rng:choice>
     </rng:define>
     <rng:define name="charoff">
-      <rng:optional>
-         <rng:attribute name="charoff">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="charoff">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="char">
-      <rng:optional>
-         <rng:attribute name="char">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="char">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="colwidth">
-      <rng:optional>
-         <rng:attribute name="colwidth">
-            <rng:ref name="colwidthAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="colwidth">
+         <rng:ref name="colwidthAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="colwidthAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">\d+(\.\d+)?\s*(\*|cm|in|mm|pc|pt)(\+\d+(\.\d+)?\s*(cm|in|mm|pc|pt))?</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="colsep">
-      <rng:optional>
-         <rng:attribute name="colsep">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="colsep">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="rowsep">
-      <rng:optional>
-         <rng:attribute name="rowsep">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="rowsep">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="spanspec">
       <rng:element name="spanspec">
@@ -5518,34 +5783,36 @@
         <rng:ref name="namest"/>
         <rng:ref name="nameend"/>
         <rng:ref name="spanname"/>
-        <a:documentation>
-            default value is : center</a:documentation>
-      <rng:ref name="align"/>
-        <rng:ref name="charoff"/>
-        <rng:ref name="char"/>
-        <rng:ref name="colsep"/>
-        <rng:ref name="rowsep"/>
+        <rng:optional>
+         <rng:ref name="align"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="charoff"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="char"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="namest">
-      <rng:optional>
-         <rng:attribute name="namest">
-            <rng:data type="NMTOKEN"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="namest">
+         <rng:data type="NMTOKEN"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="nameend">
-      <rng:optional>
-         <rng:attribute name="nameend">
-            <rng:data type="NMTOKEN"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="nameend">
+         <rng:data type="NMTOKEN"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="spanname">
-      <rng:optional>
-         <rng:attribute name="spanname">
-            <rng:data type="NMTOKEN"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="spanname">
+         <rng:data type="NMTOKEN"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="captionBody">
       <rng:element name="captionBody">
@@ -5558,10 +5825,12 @@
          <rng:ref name="captionRow"/>
       </rng:oneOrMore>
         
-        <a:documentation>
-            default value is : top</a:documentation>
-      <rng:ref name="valign"/>
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="valign"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="captionRow">
       <rng:element name="captionRow">
@@ -5574,9 +5843,15 @@
          <rng:ref name="captionEntry"/>
       </rng:oneOrMore>
         
-        <rng:ref name="rowsep"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -5592,16 +5867,36 @@
             <rng:ref name="captionText"/>
         </rng:choice>
       </rng:optional>
-        <rng:ref name="colname"/>
-        <rng:ref name="namest"/>
-        <rng:ref name="nameend"/>
-        <rng:ref name="spanname"/>
-        <rng:ref name="morerows"/>
-        <rng:ref name="colsep"/>
-        <rng:ref name="rowsep"/>
-        <rng:ref name="valign"/>
-        <rng:ref name="alignCaptionEntry"/>
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="colname"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="namest"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="nameend"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="spanname"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="morerows"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="valign"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="alignCaptionEntry"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="captionText">
       <rng:element name="captionText">
@@ -5611,6 +5906,7 @@
     <rng:define name="captionTextElemType">
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="internalRef"/>
             <rng:ref name="indexFlag"/>
             <rng:ref name="changeInline"/>
@@ -5627,20 +5923,17 @@
         <rng:ref name="changeAttGroup"/>
     </rng:define>
     <rng:define name="morerows">
-      <rng:optional>
-         <rng:attribute name="morerows" a:defaultValue="0">
-            <rng:data type="nonNegativeInteger"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="morerows" a:defaultValue="0">
+         <rng:data type="nonNegativeInteger"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="valign">
-      <rng:optional>
-         <rng:attribute name="valign">
-            <rng:ref name="valignAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="valign">
+         <rng:ref name="valignAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="valignAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>top</rng:value>
             <rng:value>bottom</rng:value>
@@ -5648,13 +5941,12 @@
         </rng:choice>
     </rng:define>
     <rng:define name="alignCaptionEntry">
-      <rng:optional>
-         <rng:attribute name="alignCaptionEntry">
-            <rng:ref name="alignCaptionEntryAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="alignCaptionEntry">
+         <rng:ref name="alignCaptionEntryAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="alignCaptionEntryAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>left</rng:value>
             <rng:value>right</rng:value>
@@ -5663,20 +5955,17 @@
         </rng:choice>
     </rng:define>
     <rng:define name="cols">
-      <rng:optional>
-         <rng:attribute name="cols">
-            <rng:data type="positiveInteger"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="cols">
+         <rng:data type="positiveInteger"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="emphasisType">
-      <rng:optional>
-         <rng:attribute name="emphasisType" a:defaultValue="em01">
-            <rng:ref name="emphasisTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="emphasisType" a:defaultValue="em01">
+         <rng:ref name="emphasisTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="emphasisTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>em01</rng:value>
             <rng:value>em02</rng:value>
@@ -5785,7 +6074,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="policyStatementElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -5795,7 +6087,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="dataCondsElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -5822,8 +6117,12 @@
          <rng:ref name="enterpriseName"/>
       </rng:optional>
         
-        <rng:ref name="enterpriseCode"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="enterpriseCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="applicCrossRefTableRef">
       <rng:element name="applicCrossRefTableRef">
@@ -5856,8 +6155,12 @@
                 <rng:ref name="evaluate"/>
             </rng:choice>
         </rng:choice>
-        <rng:ref name="applicConfiguration"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicConfiguration"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -5879,49 +6182,54 @@
       </rng:element>
    </rng:define>
     <rng:define name="assertElemType">
-        <rng:ref name="applicPropertyIdent"/>
-        <rng:ref name="applicPropertyType"/>
-        <rng:ref name="applicPropertyValues"/>
-        <rng:ref name="applicDisplayClass"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="applicPropertyIdent"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicPropertyType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicPropertyValues"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicDisplayClass"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="applicPropertyIdent">
-      <rng:optional>
-         <rng:attribute name="applicPropertyIdent">
-            <rng:data type="NCName"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicPropertyIdent">
+         <rng:data type="NCName"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="applicPropertyType">
-      <rng:optional>
-         <rng:attribute name="applicPropertyType">
-            <rng:ref name="applicPropertyTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicPropertyType">
+         <rng:ref name="applicPropertyTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="applicPropertyTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>condition</rng:value>
             <rng:value>prodattr</rng:value>
         </rng:choice>
     </rng:define>
     <rng:define name="applicPropertyValues">
-      <rng:optional>
-         <rng:attribute name="applicPropertyValues">
-            <rng:ref name="applicPropertyValuesGenericAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicPropertyValues">
+         <rng:ref name="applicPropertyValuesGenericAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="applicPropertyValuesGenericAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">[^~|\t\n\r]+(~[^~|\t\n\r]+)?(\|[^~|\t\n\r]+(~[^~|\t\n\r]+)?)*</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="applicDisplayClass">
-      <rng:optional>
-         <rng:attribute name="applicDisplayClass">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicDisplayClass">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="evaluate">
       <rng:element name="evaluate">
@@ -5936,29 +6244,29 @@
         </rng:choice>
       </rng:oneOrMore>
         <rng:ref name="andOr"/>
-        <rng:ref name="applicDisplayClass"/>
+        <rng:optional>
+         <rng:ref name="applicDisplayClass"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="andOr">
-      <rng:optional>
-         <rng:attribute name="andOr">
-            <rng:ref name="andOrAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="andOr">
+         <rng:ref name="andOrAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="andOrAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>and</rng:value>
             <rng:value>or</rng:value>
         </rng:choice>
     </rng:define>
     <rng:define name="applicConfiguration">
-      <rng:optional>
-         <rng:attribute name="applicConfiguration">
-            <rng:ref name="applicConfigurationAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicConfiguration">
+         <rng:ref name="applicConfigurationAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="applicConfigurationAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>allowed</rng:value>
             <rng:value>built</rng:value>
@@ -5980,16 +6288,17 @@
       </rng:optional>
         
         <rng:ref name="applicIdentValue"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="applicIdentValue">
-      <rng:optional>
-         <rng:attribute name="applicIdentValue">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicIdentValue">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="techStandard">
       <rng:element name="techStandard">
@@ -6020,11 +6329,13 @@
     </rng:define>
     <rng:define name="authorityInfo">
       <rng:element name="authorityInfo">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
     <rng:define name="techPubBase">
       <rng:element name="techPubBase">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -6060,11 +6371,13 @@
     </rng:define>
     <rng:define name="excludedModification">
       <rng:element name="excludedModification">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
     <rng:define name="additionalModification">
       <rng:element name="additionalModification">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -6092,31 +6405,31 @@
       </rng:optional>
         
         <rng:ref name="authorizationIdent"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="modificationType"/>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="modificationTitle">
       <rng:element name="modificationTitle">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
     <rng:define name="authorizationIdent">
-      <rng:optional>
-         <rng:attribute name="authorizationIdent">
-            <rng:data type="NMTOKEN"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="authorizationIdent">
+         <rng:data type="NMTOKEN"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="modificationType">
-      <rng:optional>
-         <rng:attribute name="modificationType">
-            <rng:ref name="modificationTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="modificationType">
+         <rng:ref name="modificationTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="modificationTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>pre</rng:value>
             <rng:value>post</rng:value>
@@ -6125,6 +6438,7 @@
     </rng:define>
     <rng:define name="authorityNotes">
       <rng:element name="authorityNotes">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -6153,16 +6467,16 @@
          </rng:optional>
             
         </rng:choice>
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="unverified">
       <rng:element name="unverified">
          <rng:ref name="unverifiedElemType"/>
       </rng:element>
    </rng:define>
-    <rng:define name="unverifiedElemType">
-      <rng:empty/>
-   </rng:define>
+    <rng:define name="unverifiedElemType"/>
     <rng:define name="firstVerification">
       <rng:element name="firstVerification">
          <rng:ref name="firstVerificationElemType"/>
@@ -6172,13 +6486,12 @@
         <rng:ref name="verificationType"/>
     </rng:define>
     <rng:define name="verificationType">
-      <rng:optional>
-         <rng:attribute name="verificationType">
-            <rng:ref name="verificationTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="verificationType">
+         <rng:ref name="verificationTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="verificationTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>tabtop</rng:value>
             <rng:value>onobject</rng:value>
@@ -6199,10 +6512,14 @@
       </rng:element>
    </rng:define>
     <rng:define name="systemBreakdownCodeElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="functionalItemCode">
       <rng:element name="functionalItemCode">
+         <rng:text/>
          <rng:data type="string"/>
       </rng:element>
    </rng:define>
@@ -6215,13 +6532,12 @@
         <rng:ref name="skillLevelCode"/>
     </rng:define>
     <rng:define name="skillLevelCode">
-      <rng:optional>
-         <rng:attribute name="skillLevelCode">
-            <rng:ref name="skillLevelCodeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="skillLevelCode">
+         <rng:ref name="skillLevelCodeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="skillLevelCodeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>sk01</rng:value>
             <rng:value>sk02</rng:value>
@@ -6335,19 +6651,26 @@
          <rng:ref name="simplePara"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
-        <rng:ref name="updateReasonType"/>
-        <rng:ref name="updateHighlight"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="updateReasonType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="updateHighlight"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="updateReasonType">
-      <rng:optional>
-         <rng:attribute name="updateReasonType">
-            <rng:ref name="updateReasonTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="updateReasonType">
+         <rng:ref name="updateReasonTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="updateReasonTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>urt01</rng:value>
             <rng:value>urt02</rng:value>
@@ -6451,11 +6774,9 @@
         </rng:choice>
     </rng:define>
     <rng:define name="updateHighlight">
-      <rng:optional>
-         <rng:attribute name="updateHighlight">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="updateHighlight">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="productSafety">
       <rng:element name="productSafety">
@@ -6463,14 +6784,14 @@
       </rng:element>
    </rng:define>
     <rng:define name="productSafetyElemType">
+      <rng:text/>
         <rng:ref name="safetyLabel"/>
     </rng:define>
     <rng:define name="safetyLabel">
-      <rng:optional>
-         <rng:attribute name="safetyLabel">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="safetyLabel">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="remarks">
       <rng:element name="remarks">
@@ -6483,16 +6804,17 @@
          <rng:ref name="simplePara"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="issueType">
-      <rng:optional>
-         <rng:attribute name="issueType" a:defaultValue="new">
-            <rng:ref name="issueTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="issueType" a:defaultValue="new">
+         <rng:ref name="issueTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="issueTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>new</rng:value>
             <rng:value>changed</rng:value>
@@ -6528,7 +6850,9 @@
       </rng:optional>
             <rng:ref name="description"/>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="referencedApplicGroup">
       <rng:element name="referencedApplicGroup">
@@ -6573,7 +6897,9 @@
             <rng:ref name="caution"/>
          </rng:oneOrMore>
         </rng:choice>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -6591,11 +6917,21 @@
          <rng:ref name="warningAndCautionPara"/>
       </rng:oneOrMore>
         
-        <rng:ref name="warningType"/>
-        <rng:ref name="internalRefId"/>
-        <rng:ref name="vitalWarningFlag"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="warningType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="internalRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="vitalWarningFlag"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -6606,31 +6942,34 @@
       </rng:element>
    </rng:define>
     <rng:define name="warningAndCautionParaElemType">
+      <rng:text/>
         <rng:zeroOrMore>
          <rng:choice>
+            <rng:text/>
             <rng:ref name="attentionText"/>
             <rng:ref name="attentionRandomList"/>
         </rng:choice>
       </rng:zeroOrMore>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
     </rng:define>
     <rng:define name="warningType">
-      <rng:optional>
-         <rng:attribute name="warningType">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="warningType">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="vitalWarningFlag">
-      <rng:optional>
-         <rng:attribute name="vitalWarningFlag">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="vitalWarningFlag">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="caution">
       <rng:element name="caution">
@@ -6646,20 +6985,27 @@
          <rng:ref name="warningAndCautionPara"/>
       </rng:oneOrMore>
         
-        <rng:ref name="cautionType"/>
-        <rng:ref name="internalRefId"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="cautionType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="internalRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
     </rng:define>
     <rng:define name="cautionType">
-      <rng:optional>
-         <rng:attribute name="cautionType">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="cautionType">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="warningsAndCautionsRef">
       <rng:element name="warningsAndCautionsRef">
@@ -6680,7 +7026,9 @@
             <rng:ref name="cautionRef"/>
          </rng:oneOrMore>
         </rng:choice>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -6695,17 +7043,18 @@
          <rng:ref name="dmRef"/>
       </rng:optional>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="warningIdentNumber"/>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="warningIdentNumber">
-      <rng:optional>
-         <rng:attribute name="warningIdentNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="warningIdentNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="cautionRef">
       <rng:element name="cautionRef">
@@ -6718,17 +7067,18 @@
          <rng:ref name="dmRef"/>
       </rng:optional>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="cautionIdentNumber"/>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
     <rng:define name="cautionIdentNumber">
-      <rng:optional>
-         <rng:attribute name="cautionIdentNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="cautionIdentNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="description">
       <rng:element name="description">
@@ -6756,8 +7106,12 @@
             </rng:choice>
         </rng:choice>
       </rng:oneOrMore>
-        <rng:ref name="warningRefs"/>
-        <rng:ref name="cautionRefs"/>
+        <rng:optional>
+         <rng:ref name="warningRefs"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="cautionRefs"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="attentionElemGroup">
         
@@ -6799,10 +7153,18 @@
             </rng:choice>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="warningRefs"/>
-        <rng:ref name="cautionRefs"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="warningRefs"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="cautionRefs"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -6850,10 +7212,18 @@
          <rng:ref name="footnote"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="circuitBreakerAction"/>
-        <rng:ref name="checkSum"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="circuitBreakerAction"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="checkSum"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -6874,10 +7244,18 @@
       </rng:oneOrMore>
             
         
-        <rng:ref name="circuitBreakerAction"/>
-        <rng:ref name="checkSum"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="circuitBreakerAction"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="checkSum"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -6903,8 +7281,12 @@
          <rng:ref name="footnoteRemarks"/>
       </rng:optional>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -6915,7 +7297,10 @@
       </rng:element>
    </rng:define>
     <rng:define name="circuitBreakerLocationElemType">
-        <rng:ref name="id"/>
+      <rng:text/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -6931,7 +7316,9 @@
             <rng:ref name="footnoteRef"/>
         </rng:choice>
       </rng:oneOrMore>
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="fmftElemGroup">
         <rng:choice>
@@ -6958,8 +7345,12 @@
          <rng:ref name="legend"/>
       </rng:optional>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -6978,12 +7369,22 @@
          <rng:ref name="reasonForAmendment"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
         <rng:ref name="infoEntityIdent"/>
-        <rng:ref name="reproductionWidth"/>
-        <rng:ref name="reproductionHeight"/>
-        <rng:ref name="reproductionScale"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="reproductionWidth"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="reproductionHeight"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="reproductionScale"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -7003,15 +7404,33 @@
             <rng:ref name="catalogSeqNumberRef"/>
         </rng:choice>
       </rng:zeroOrMore>
-        <rng:ref name="applicationStructureIdent"/>
-        <rng:ref name="applicationStructureName"/>
-        <rng:ref name="hotspotType"/>
-        <rng:ref name="hotspotTitle"/>
-        <rng:ref name="objectDescr"/>
-        <rng:ref name="objectCoordinates"/>
-        <rng:ref name="visibility"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicationStructureIdent"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicationStructureName"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="hotspotType"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="hotspotTitle"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="objectDescr"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="objectCoordinates"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="visibility"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -7026,145 +7445,159 @@
          <rng:ref name="refs"/>
       </rng:optional>
         
-        <rng:ref name="modelIdentCode"/>
-        <rng:ref name="systemDiffCode"/>
-        <rng:ref name="systemCode"/>
-        <rng:ref name="subSystemCode"/>
-        <rng:ref name="subSubSystemCode"/>
-        <rng:ref name="assyCode"/>
+        <rng:optional>
+         <rng:ref name="modelIdentCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="systemDiffCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="systemCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="subSystemCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="subSubSystemCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="assyCode"/>
+      </rng:optional>
         <rng:ref name="figureNumber"/>
-        <rng:ref name="figureNumberVariant"/>
-        <rng:ref name="itemLocationCode"/>
+        <rng:optional>
+         <rng:ref name="figureNumberVariant"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="itemLocationCode"/>
+      </rng:optional>
         <rng:ref name="item"/>
-        <rng:ref name="itemVariant"/>
-        <rng:ref name="itemSeqNumberValue"/>
-        <rng:ref name="initialProvisioningProjectNumber"/>
-        <rng:ref name="responsiblePartnerCompanyCode"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="itemVariant"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="itemSeqNumberValue"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="initialProvisioningProjectNumber"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="responsiblePartnerCompanyCode"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="xlink:XLINKATT2"/>
     </rng:define>
     <rng:define name="figureNumber">
-      <rng:optional>
-         <rng:attribute name="figureNumber">
-            <rng:ref name="figureNumberAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="figureNumber">
+         <rng:ref name="figureNumberAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="figureNumberAttType">
+      <rng:text/>
         <rng:data type="positiveInteger">
          <rng:param name="pattern">\d{2}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="figureNumberVariant">
-      <rng:optional>
-         <rng:attribute name="figureNumberVariant">
-            <rng:ref name="figureNumberVariantAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="figureNumberVariant">
+         <rng:ref name="figureNumberVariantAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="figureNumberVariantAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">([A-Z-[IO]]{1})</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="item">
-      <rng:optional>
-         <rng:attribute name="item">
-            <rng:ref name="itemAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="item">
+         <rng:ref name="itemAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="itemAttType">
+      <rng:text/>
         <rng:data type="nonNegativeInteger">
          <rng:param name="pattern">\d{3}</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="itemVariant">
-      <rng:optional>
-         <rng:attribute name="itemVariant">
-            <rng:ref name="itemVariantAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="itemVariant">
+         <rng:ref name="itemVariantAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="itemVariantAttType">
-        <rng:data type="string">
+      <rng:text/>
+        <rng:text/>
+      <rng:data type="string">
          <rng:param name="pattern">([A-Z-[IO]]{1})</rng:param>
       </rng:data>
     </rng:define>
     <rng:define name="itemSeqNumberValue">
-      <rng:optional>
-         <rng:attribute name="itemSeqNumberValue">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="itemSeqNumberValue">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="initialProvisioningProjectNumber">
-      <rng:optional>
-         <rng:attribute name="initialProvisioningProjectNumber">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="initialProvisioningProjectNumber">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="responsiblePartnerCompanyCode">
-      <rng:optional>
-         <rng:attribute name="responsiblePartnerCompanyCode">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="responsiblePartnerCompanyCode">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="applicationStructureIdent">
-      <rng:optional>
-         <rng:attribute name="applicationStructureIdent">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicationStructureIdent">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="applicationStructureName">
-      <rng:optional>
-         <rng:attribute name="applicationStructureName">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="applicationStructureName">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="hotspotType">
-      <rng:optional>
-         <rng:attribute name="hotspotType">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="hotspotType">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="hotspotTitle">
-      <rng:optional>
-         <rng:attribute name="hotspotTitle">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="hotspotTitle">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="objectDescr">
-      <rng:optional>
-         <rng:attribute name="objectDescr">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="objectDescr">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="objectCoordinates">
-      <rng:optional>
-         <rng:attribute name="objectCoordinates">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="objectCoordinates">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="visibility">
-      <rng:optional>
-         <rng:attribute name="visibility" a:defaultValue="visible">
-            <rng:ref name="visibilityAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="visibility" a:defaultValue="visible">
+         <rng:ref name="visibilityAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="visibilityAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>visible</rng:value>
             <rng:value>hidden</rng:value>
@@ -7176,12 +7609,15 @@
       </rng:element>
    </rng:define>
     <rng:define name="reasonForAmendmentElemType">
+      <rng:text/>
         
             <rng:zeroOrMore>
          <rng:ref name="textElemGroup"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="legend">
       <rng:element name="legend">
@@ -7192,7 +7628,9 @@
         
             <rng:ref name="definitionList"/>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
     </rng:define>
@@ -7207,7 +7645,9 @@
          <rng:ref name="figure"/>
       </rng:oneOrMore>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -7226,8 +7666,12 @@
          <rng:ref name="multimediaObject"/>
       </rng:oneOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -7246,16 +7690,32 @@
          <rng:ref name="reasonForAmendment"/>
       </rng:zeroOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="autoPlay"/>
-        <rng:ref name="fullScreen"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="autoPlay"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="fullScreen"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="infoEntityIdent"/>
-        <rng:ref name="multimediaObjectHeight"/>
-        <rng:ref name="multimediaObjectWidth"/>
+        <rng:optional>
+         <rng:ref name="multimediaObjectHeight"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="multimediaObjectWidth"/>
+      </rng:optional>
         <rng:ref name="multimediaType"/>
-        <rng:ref name="runTimeDuration"/>
-        <rng:ref name="showPluginControls"/>
+        <rng:optional>
+         <rng:ref name="runTimeDuration"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="showPluginControls"/>
+      </rng:optional>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -7268,67 +7728,63 @@
    </rng:define>
     <rng:define name="parameterElemType">
         <rng:ref name="id"/>
-        <rng:ref name="parameterIdent"/>
-        <rng:ref name="parameterValue"/>
-        <rng:ref name="parameterName"/>
+        <rng:optional>
+         <rng:ref name="parameterIdent"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="parameterValue"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="parameterName"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="parameterIdent">
-      <rng:optional>
-         <rng:attribute name="parameterIdent">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="parameterIdent">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="parameterValue">
-      <rng:optional>
-         <rng:attribute name="parameterValue">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="parameterValue">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="parameterName">
-      <rng:optional>
-         <rng:attribute name="parameterName">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="parameterName">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="autoPlay">
-      <rng:optional>
-         <rng:attribute name="autoPlay">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="autoPlay">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="fullScreen">
-      <rng:optional>
-         <rng:attribute name="fullScreen">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="fullScreen">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="multimediaObjectHeight">
-      <rng:optional>
-         <rng:attribute name="multimediaObjectHeight">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="multimediaObjectHeight">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="multimediaObjectWidth">
-      <rng:optional>
-         <rng:attribute name="multimediaObjectWidth">
-            <rng:data type="string"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="multimediaObjectWidth">
+         <rng:text/>
+         <rng:data type="string"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="multimediaType">
-      <rng:optional>
-         <rng:attribute name="multimediaType">
-            <rng:ref name="multimediaTypeAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="multimediaType">
+         <rng:ref name="multimediaTypeAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="multimediaTypeAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>3D</rng:value>
             <rng:value>audio</rng:value>
@@ -7337,20 +7793,18 @@
         </rng:choice>
     </rng:define>
     <rng:define name="runTimeDuration">
-      <rng:optional>
-         <rng:attribute name="runTimeDuration">
-            <rng:data type="integer"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="runTimeDuration">
+         <rng:text/>
+         <rng:data type="integer"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="showPluginControls">
-      <rng:optional>
-         <rng:attribute name="showPluginControls">
-            <rng:ref name="showPluginControlsAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="showPluginControls">
+         <rng:ref name="showPluginControlsAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="showPluginControlsAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>hide</rng:value>
             <rng:value>show</rng:value>
@@ -7367,7 +7821,9 @@
          <rng:ref name="multimedia"/>
       </rng:oneOrMore>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -7412,15 +7868,33 @@
          </rng:oneOrMore>
             </rng:choice>
         
-        <rng:ref name="tabstyle"/>
-        <rng:ref name="tocentry"/>
-        <rng:ref name="frame"/>
-        <rng:ref name="colsep"/>
-        <rng:ref name="rowsep"/>
-        <rng:ref name="orient"/>
-        <rng:ref name="pgwide"/>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="tabstyle"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="tocentry"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="frame"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="orient"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="pgwide"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
@@ -7446,16 +7920,28 @@
       </rng:optional>
             <rng:ref name="tbody"/>
         
-        <rng:ref name="applicRefId"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
         <rng:ref name="cols"/>
-        <rng:ref name="tgstyle"/>
-        <rng:ref name="colsep"/>
-        <rng:ref name="rowsep"/>
-        <a:documentation>
-            default value is : left</a:documentation>
-      <rng:ref name="align"/>
-        <rng:ref name="charoff"/>
-        <rng:ref name="char"/>
+        <rng:optional>
+         <rng:ref name="tgstyle"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="align"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="charoff"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="char"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="thead">
       <rng:element name="thead">
@@ -7471,9 +7957,9 @@
          <rng:ref name="row"/>
       </rng:oneOrMore>
         
-        <a:documentation>
-            default value is : bottom</a:documentation>
-      <rng:ref name="valign"/>
+        <rng:optional>
+         <rng:ref name="valign"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="row">
       <rng:element name="row">
@@ -7486,9 +7972,15 @@
          <rng:ref name="entry"/>
       </rng:oneOrMore>
         
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="rowsep"/>
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="securityAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
@@ -7508,43 +8000,69 @@
             <rng:ref name="legend"/>
         </rng:choice>
       </rng:zeroOrMore>
-        <rng:ref name="applicRefId"/>
-        <rng:ref name="colname"/>
-        <rng:ref name="namest"/>
-        <rng:ref name="nameend"/>
-        <rng:ref name="spanname"/>
-        <rng:ref name="morerows"/>
-        <rng:ref name="colsep"/>
-        <rng:ref name="rowsep"/>
-        <rng:ref name="rotate"/>
-        <rng:ref name="valign"/>
-        <rng:ref name="align"/>
-        <rng:ref name="charoff"/>
-        <rng:ref name="char"/>
-        <rng:ref name="id"/>
-        <rng:ref name="warningRefs"/>
-        <rng:ref name="cautionRefs"/>
+        <rng:optional>
+         <rng:ref name="applicRefId"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colname"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="namest"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="nameend"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="spanname"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="morerows"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="colsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rowsep"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="rotate"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="valign"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="align"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="charoff"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="char"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="warningRefs"/>
+      </rng:optional>
+        <rng:optional>
+         <rng:ref name="cautionRefs"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="rotate">
-      <rng:optional>
-         <rng:attribute name="rotate" a:defaultValue="0">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="rotate" a:defaultValue="0">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="warningRefs">
-      <rng:optional>
-         <rng:attribute name="warningRefs">
-            <rng:data type="IDREFS"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="warningRefs">
+         <rng:data type="IDREFS"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="cautionRefs">
-      <rng:optional>
-         <rng:attribute name="cautionRefs">
-            <rng:data type="IDREFS"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="cautionRefs">
+         <rng:data type="IDREFS"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="tfoot">
       <rng:element name="tfoot">
@@ -7560,9 +8078,9 @@
          <rng:ref name="row"/>
       </rng:oneOrMore>
         
-        <a:documentation>
-            default value is : top</a:documentation>
-      <rng:ref name="valign"/>
+        <rng:optional>
+         <rng:ref name="valign"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="tbody">
       <rng:element name="tbody">
@@ -7575,39 +8093,32 @@
          <rng:ref name="row"/>
       </rng:oneOrMore>
         
-        <a:documentation>
-            default value is : top</a:documentation>
-      <rng:ref name="valign"/>
+        <rng:optional>
+         <rng:ref name="valign"/>
+      </rng:optional>
     </rng:define>
     <rng:define name="tgstyle">
-      <rng:optional>
-         <rng:attribute name="tgstyle">
-            <rng:data type="NMTOKEN"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="tgstyle">
+         <rng:data type="NMTOKEN"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="tabstyle">
-      <rng:optional>
-         <rng:attribute name="tabstyle">
-            <rng:data type="NMTOKEN"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="tabstyle">
+         <rng:data type="NMTOKEN"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="tocentry">
-      <rng:optional>
-         <rng:attribute name="tocentry" a:defaultValue="1">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="tocentry" a:defaultValue="1">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="frame">
-      <rng:optional>
-         <rng:attribute name="frame">
-            <rng:ref name="frameAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="frame">
+         <rng:ref name="frameAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="frameAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>top</rng:value>
             <rng:value>bottom</rng:value>
@@ -7618,24 +8129,21 @@
         </rng:choice>
     </rng:define>
     <rng:define name="orient">
-      <rng:optional>
-         <rng:attribute name="orient">
-            <rng:ref name="orientAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="orient">
+         <rng:ref name="orientAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="orientAttType">
+      <rng:text/>
         <rng:choice>
             <rng:value>port</rng:value>
             <rng:value>land</rng:value>
         </rng:choice>
     </rng:define>
     <rng:define name="pgwide">
-      <rng:optional>
-         <rng:attribute name="pgwide">
-            <rng:ref name="yesOrNoAttType"/>
-         </rng:attribute>
-      </rng:optional>
+      <rng:attribute name="pgwide">
+         <rng:ref name="yesOrNoAttType"/>
+      </rng:attribute>
    </rng:define>
     <rng:define name="levelledParaAlts">
       <rng:element name="levelledParaAlts">
@@ -7648,7 +8156,9 @@
          <rng:ref name="levelledPara"/>
       </rng:oneOrMore>
         
-        <rng:ref name="id"/>
+        <rng:optional>
+         <rng:ref name="id"/>
+      </rng:optional>
         <rng:ref name="changeAttGroup"/>
         <rng:ref name="authorityAttGroup"/>
         <rng:ref name="securityAttGroup"/>
